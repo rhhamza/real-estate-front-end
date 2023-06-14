@@ -9,6 +9,10 @@ import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { ReviewTestmonialComponent } from './components/review-testmonial/review-testmonial.component';
 import { BlogComponent } from './components/blog/blog.component';
+import { RouterModule } from '@angular/router';
+import { OfferCardComponent } from './components/offer-card/offer-card.component';
+import { SwitcherComponent } from './components/switcher/switcher.component';
+import { CompanyCardComponent } from './components/company-card/company-card.component';
 
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
@@ -19,14 +23,18 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 @NgModule({
   declarations: [
     ReviewTestmonialComponent,
-    BlogComponent
+    BlogComponent,
+    OfferCardComponent,
+    SwitcherComponent,
+    CompanyCardComponent
   ],
   imports: [
     CommonModule,
     SwiperModule,
     FeatherModule.pick(allIcons),
     NgbNavModule,
-    CarouselModule
+    CarouselModule,
+    RouterModule
   ],
   exports: [
     FeatherModule,
@@ -34,7 +42,11 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     NgbNavModule,
     CarouselModule,
     ReviewTestmonialComponent,
-    BlogComponent
+    BlogComponent,
+    RouterModule,
+    OfferCardComponent,
+    SwitcherComponent,
+    CompanyCardComponent
   ],
   providers: [
     {
