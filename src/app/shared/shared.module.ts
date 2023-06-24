@@ -14,7 +14,6 @@ import { OfferCardComponent } from './components/offer-card/offer-card.component
 import { SwitcherComponent } from './components/switcher/switcher.component';
 import { CompanyCardComponent } from './components/company-card/company-card.component';
 
-
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
   slidesPerView: 'auto'
@@ -34,7 +33,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     FeatherModule.pick(allIcons),
     NgbNavModule,
     CarouselModule,
-    RouterModule
+    RouterModule,
   ],
   exports: [
     FeatherModule,
