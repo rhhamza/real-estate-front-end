@@ -6,6 +6,9 @@ import { CompaniesComponent } from './companies/companies.component';
 import { OfferDetailsComponent } from './offer-details/offer-details.component';
 import { ChatComponent } from './chat/chat.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { BlogsComponent } from './blogs/blogs.component';
+import { BlogDetailComponent } from './blog-detail/blog-detail.component';
+import { CompanyDetailsComponent } from './company-details/company-details.component';
 
 const routes: Routes = [
   {
@@ -29,12 +32,24 @@ const routes: Routes = [
     component: CompaniesComponent
   },
   {
+    path: 'companies/:company',
+    component: CompanyDetailsComponent
+  },
+  {
     path: 'chat',
     component: ChatComponent
   },
   {
     path: 'calendar',
     component: CalendarComponent
+  },
+  {
+    path: 'blogs',
+    component: BlogsComponent
+  },
+  {
+    path: 'blogs/:blog',
+    component: BlogDetailComponent
   },
   {
     path: 'admin',

@@ -11,6 +11,9 @@ import { OfferDetailsComponent } from './offer-details/offer-details.component';
 import { CompaniesComponent } from './companies/companies.component';
 import { ChatComponent } from './chat/chat.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { BlogsComponent } from './blogs/blogs.component';
+import { BlogDetailComponent } from './blog-detail/blog-detail.component';
+import { CompanyDetailsComponent } from './company-details/company-details.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { CalendarComponent } from './calendar/calendar.component';
     OfferDetailsComponent,
     CompaniesComponent,
     ChatComponent,
-    CalendarComponent
+    CalendarComponent,
+    BlogsComponent,
+    BlogDetailComponent,
+    CompanyDetailsComponent
   ],
   imports: [
     BrowserModule,
