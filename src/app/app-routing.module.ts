@@ -4,6 +4,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { OffersComponent } from './offers/offers.component';
 import { CompaniesComponent } from './companies/companies.component';
 import { OfferDetailsComponent } from './offer-details/offer-details.component';
+import { ChatComponent } from './chat/chat.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
   {
     path: 'companies',
     component: CompaniesComponent
+  },
+  {
+    path: 'chat',
+    component: ChatComponent
   },
   {
     path: 'admin',
