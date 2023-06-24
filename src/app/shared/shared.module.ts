@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import { OfferCardComponent } from './components/offer-card/offer-card.component';
 import { SwitcherComponent } from './components/switcher/switcher.component';
 import { CompanyCardComponent } from './components/company-card/company-card.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -34,6 +35,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     NgbNavModule,
     CarouselModule,
     RouterModule,
+    FullCalendarModule
   ],
   exports: [
     FeatherModule,
@@ -45,7 +47,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     RouterModule,
     OfferCardComponent,
     SwitcherComponent,
-    CompanyCardComponent
+    CompanyCardComponent,
+    FullCalendarModule
   ],
   providers: [
     {

@@ -10,6 +10,7 @@ import { OffersComponent } from './offers/offers.component';
 import { OfferDetailsComponent } from './offer-details/offer-details.component';
 import { CompaniesComponent } from './companies/companies.component';
 import { ChatComponent } from './chat/chat.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ChatComponent } from './chat/chat.component';
     OffersComponent,
     OfferDetailsComponent,
     CompaniesComponent,
-    ChatComponent
+    ChatComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,

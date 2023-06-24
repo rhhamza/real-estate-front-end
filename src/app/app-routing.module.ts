@@ -5,6 +5,7 @@ import { OffersComponent } from './offers/offers.component';
 import { CompaniesComponent } from './companies/companies.component';
 import { OfferDetailsComponent } from './offer-details/offer-details.component';
 import { ChatComponent } from './chat/chat.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: 'chat',
     component: ChatComponent
+  },
+  {
+    path: 'calendar',
+    component: CalendarComponent
   },
   {
     path: 'admin',
