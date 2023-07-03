@@ -14,6 +14,8 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { BlogsComponent } from './blogs/blogs.component';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 import { CompanyDetailsComponent } from './company-details/company-details.component';
+import { HttpClientModule } from '@angular/common/http';
+import { UserService } from './core/services/user.service';
 
 @NgModule({
   declarations: [
@@ -33,9 +35,10 @@ import { CompanyDetailsComponent } from './company-details/company-details.compo
     BrowserAnimationsModule,
     AppRoutingModule,
     LayoutsModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

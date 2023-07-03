@@ -31,7 +31,7 @@
     "ngx-event-calendar": "^1.0.0",
     "ngx-owl-carousel-o": "^4.0.0",
     "ngx-swiper-wrapper": "^10.0.0",
-    "rxjs": "~7.5.0",
+    "rxjs": "^7.8.1",
     "swiper": "^6.7.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
