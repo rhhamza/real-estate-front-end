@@ -16,9 +16,6 @@ import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 import { CompanyDetailsComponent } from './company-details/company-details.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './core/services/user.service';
-import { CompanyService } from './core/services/company-service.service';
-import { CompanyCardComponent } from './shared/components/company-card/company-card.component';
-
 
 @NgModule({
   declarations: [
@@ -32,7 +29,6 @@ import { CompanyCardComponent } from './shared/components/company-card/company-c
     BlogsComponent,
     BlogDetailComponent,
     CompanyDetailsComponent
-    
   ],
   imports: [
     BrowserModule,
@@ -42,7 +38,7 @@ import { CompanyCardComponent } from './shared/components/company-card/company-c
     SharedModule,
     HttpClientModule
   ],
-  providers: [CompanyService,UserService],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

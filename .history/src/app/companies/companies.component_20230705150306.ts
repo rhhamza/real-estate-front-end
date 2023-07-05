@@ -9,7 +9,7 @@ import { Company } from '../core/models/company.model';
   styleUrls: ['./companies.component.scss']
 })
 export class CompaniesComponent implements OnInit {
-  companies: any;
+  companies: Company[] = [];
 
   constructor(private companyService: CompanyService) {}
 

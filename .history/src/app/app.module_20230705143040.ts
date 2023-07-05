@@ -31,8 +31,8 @@ import { CompanyCardComponent } from './shared/components/company-card/company-c
     CalendarComponent,
     BlogsComponent,
     BlogDetailComponent,
-    CompanyDetailsComponent
-    
+    CompanyDetailsComponent,
+    CompanyCardComponent
   ],
   imports: [
     BrowserModule,

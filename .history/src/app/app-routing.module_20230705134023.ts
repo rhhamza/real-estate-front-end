@@ -31,9 +31,8 @@ const routes: Routes = [
     path: 'companies',
     component: CompaniesComponent
   },
-  
   {
-    path: 'companies/:companyid',
+    path: 'companies/:company',
     component: CompanyDetailsComponent
   },
   {

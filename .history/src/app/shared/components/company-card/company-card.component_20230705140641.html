@@ -1,0 +1,47 @@
+<div class="company-list card border-0 rounded shadow bg-white">
+    <div class="text-center py-5 border-bottom">
+        <img src="{{data.icon}}" class="avatar avatar-small mx-auto rounded-circle d-block mb-3" alt="">
+        <a routerLink="/page-job-company" class="text-dark h5 name">{{data.name}}</a>
+        <p class="text-muted mt-1 mb-0">{{data.service}}</p>
+    </div>
+
+    <div class="p-4">
+        <h5>Company Details :</h5>
+        <ul class="list-unstyled mb-4">
+            <li class="h6"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-map-pin fea icon-sm text-warning me-2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                </svg><span class="text-muted">Location :</span> {{data.name}}</li>
+            <li class="h6"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-link fea icon-sm text-warning me-2">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                </svg><span class="text-muted">Comapny :</span> circleci.com</li>
+            <li class="h6"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-dollar-sign fea icon-sm text-warning me-2">
+                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg><span class="text-muted">Revenue :</span> $ 5M / Annual</li>
+            <li class="h6"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-users fea icon-sm text-warning me-2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg><span class="text-muted">No. of employees :</span> 200</li>
+        </ul>
+        <div class="d-grid">
+            <a routerLink="/page-job-company" class="btn btn-soft-primary">View Detail <i
+                    class="uil uil-angle-right-b align-middle"></i></a>
+        </div>
+    </div>
+</div>

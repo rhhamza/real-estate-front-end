@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Company } from '../../../core/models/company.model';
-import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-company-card',
   templateUrl: './company-card.component.html',
@@ -8,10 +7,10 @@ import { Router } from '@angular/router';
 })
 export class CompanyCardComponent implements OnInit {
 
-  @Input() company!: Company;
-
-  constructor(private router: Router) { }
+  @Input() data: any;
+  constructor() { }
 
   ngOnInit(): void {
   }
+
 }

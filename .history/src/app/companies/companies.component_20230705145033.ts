@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CompanyService } from '../core/services/company-service.service';
+import { CompanyService } from 'src/app/core/services/company-service.service';
 import { Router } from '@angular/router';
 import { Company } from '../core/models/company.model';
 
@@ -9,9 +9,10 @@ import { Company } from '../core/models/company.model';
   styleUrls: ['./companies.component.scss']
 })
 export class CompaniesComponent implements OnInit {
-  companies: any;
 
-  constructor(private companyService: CompanyService) {}
+  companyService!: CompanyService;
+  companies?: Company[];
+  constructor() {}
 
   ngOnInit(): void {
     this.getAllCompanies();
