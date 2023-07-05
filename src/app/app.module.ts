@@ -18,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './core/services/user.service';
 import { CompanyService } from './core/services/company-service.service';
 import { CompanyCardComponent } from './shared/components/company-card/company-card.component';
-
+import { CompaniesMgtComponent } from './companies-mgt/companies-mgt.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,8 @@ import { CompanyCardComponent } from './shared/components/company-card/company-c
     CalendarComponent,
     BlogsComponent,
     BlogDetailComponent,
-    CompanyDetailsComponent
+    CompanyDetailsComponent,
+    CompaniesMgtComponent
     
   ],
   imports: [

@@ -9,21 +9,22 @@ import { CompanyService } from '../core/services/company-service.service';
   styleUrls: ['./company-details.component.scss']
 })
 export class CompanyDetailsComponent implements OnInit {
-  public company!: Company;
+  id?: string;
+  company?:any;
 
   constructor(private route: ActivatedRoute, private companyService: CompanyService) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const companyId = params.get('companyid');
-      if (companyId) {
-        this.getCompanyDetails(companyId);
-      }
-    });
+    const companyId = this.route.snapshot.paramMap.get('companyid');
+    if (companyId !== null) {
+      this.id = companyId;
+      this.getCompanyDetails(companyId);
+    }
   }
+  
 
-  getCompanyDetails(companyId: string): void {
-    this.companyService.getCompanyById(companyId).subscribe(
+  getCompanyDetails(id: string): void {
+    this.companyService.getCompanyById(id).subscribe(
       (company: Company) => {
         this.company = company;
       },
