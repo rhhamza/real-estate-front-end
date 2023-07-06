@@ -1,7 +1,10 @@
+import { IOffer } from "../interfaces/response";
+
 export class Offer {
     id: string;
     title: string;
     reference: string;
+    description: string;
     type: string;
     category: string;
     price: string;
@@ -13,9 +16,10 @@ export class Offer {
     createdAt: string;
     updatedAt: string;
 
-    constructor(data: any) {
+    constructor(data: IOffer) {
         this.id = data.id;
         this.title = data.title;
+        this.description = data.description
         this.reference = data.reference;
         this.type = data.type;
         this.category = data.category

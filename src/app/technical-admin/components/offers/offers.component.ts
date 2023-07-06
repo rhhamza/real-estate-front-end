@@ -18,6 +18,7 @@ export class OffersComponent implements OnInit {
   dataSource = new MatTableDataSource<Offer>
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  offer?: Offer
 
   constructor(
     private offerService: OfferService,
@@ -52,9 +53,8 @@ export class OffersComponent implements OnInit {
     }
   }
 
-  deleteOffer(offer: number) {
+  deleteOffer(offer: string) {
     this.offerService.deleteOffer(offer).subscribe((response) => {
-      console.log(response);
       
     })
   }
