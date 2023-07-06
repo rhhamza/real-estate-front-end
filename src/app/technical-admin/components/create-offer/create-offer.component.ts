@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IOffer } from 'src/app/core/interfaces/response';
 import { OfferService } from 'src/app/core/services/offer.service';
+import { NotifierService } from 'angular-notifier';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-offer',
@@ -14,7 +16,9 @@ export class CreateOfferComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private offerService: OfferService
+    private offerService: OfferService,
+    private notifier: NotifierService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -51,9 +55,13 @@ export class CreateOfferComponent implements OnInit {
       this.offerService.createOffer(body).subscribe((response: IOffer) => {
         this.submitted = false;
         this.offerForm.reset();
+        this.notifier.notify(
+          'success',
+          'Offer succesfully Added'
+        );
         setTimeout(() => {
-          
-        }, 2000);
+          this.router.navigate(['admin', 'offers']);
+        }, 3000);
         
       })
   }
