@@ -1,17 +1,18 @@
+import { ResetPassword } from './../models/ResetPassword.model';
 import { Injectable } from '@angular/core';
 import { UserEntity } from '../models/user-entity.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IUserEntity } from '../interfaces/user.interface';
 import { UserLogin } from '../models/login.model';
-import { AuthResponseDto } from '../models/AuthResponseDto .model';
+import { AuthResponseDto } from '../models/AuthResponseDto.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = "http://localhost:8089/Realstate/api/auth";
-
+  private apiUrl = environment.backEndApi + "/api/auth";
 
 
   constructor(private http: HttpClient) { }
@@ -26,6 +27,12 @@ export class UserService {
   
 
   login(loginDto: UserLogin): Observable<AuthResponseDto> {
-    return this.http.post<AuthResponseDto>(`${this.apiUrl}/login`, loginDto);
+    return this.http.post(`${this.apiUrl}/login`, loginDto) as Observable<AuthResponseDto>;
+  }
+ 
+  resetPassword(email: string): Observable<string> {
+    const resetPasswordData: ResetPassword = { email: email };
+    return this.http.post<string>(`${this.apiUrl}/reset-password`, resetPasswordData);
+  
   }
 }
