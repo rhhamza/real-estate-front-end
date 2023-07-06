@@ -16,6 +16,9 @@ import { CompanyCardComponent } from './components/company-card/company-card.com
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableModule} from '@angular/material/table';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -54,7 +57,11 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     SwitcherComponent,
     CompanyCardComponent,
     FullCalendarModule,
-    NgbModalModule
+    NgbModalModule,
+    MatTableModule, 
+    MatPaginatorModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     {
