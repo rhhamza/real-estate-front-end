@@ -9,7 +9,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { BlogsComponent } from './blogs/blogs.component';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 import { CompanyDetailsComponent } from './company-details/company-details.component';
-
+import {CompaniesMgtComponent} from './companies-mgt/companies-mgt.component'
 const routes: Routes = [
   {
     path: '',
@@ -31,10 +31,17 @@ const routes: Routes = [
     path: 'companies',
     component: CompaniesComponent
   },
+  
   {
-    path: 'companies/:company',
-    component: CompanyDetailsComponent
+    path: 'companies/:companyid',
+    component: CompanyDetailsComponent 
   },
+  {
+    path: 'companies-mgt',
+    component: CompaniesMgtComponent
+  },
+  
+
   {
     path: 'chat',
     component: ChatComponent

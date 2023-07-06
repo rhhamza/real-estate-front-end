@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CompanyService } from '../core/services/company-service.service';
+import { Router } from '@angular/router';
+import { Company } from '../core/models/company.model';
 
 @Component({
   selector: 'app-companies',
@@ -6,53 +9,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./companies.component.scss']
 })
 export class CompaniesComponent implements OnInit {
+  companies: any;
 
-  companysData: any[] = [
-    {
-      icon: "assets/images/job/Circleci.svg",
-      name: "CircleCi",
-      service: "Internet Services"
-    },
-    {
-      icon: "assets/images/job/Mg.svg",
-      name: "Mg",
-      service: "Internet Services"
-    },
-    {
-      icon: "assets/images/job/Twilio.svg",
-      name: "Twilio",
-      service: "Internet Services"
-    },
-    {
-      icon: "assets/images/job/Udemy.svg",
-      name: "Udemy",
-      service: "Internet Services"
-    },
-    {
-      icon: "assets/images/job/Webhooks.svg",
-      name: "Webhooks",
-      service: "Internet Services"
-    },
-    {
-      icon: "assets/images/job/Discord.svg",
-      name: "Discord",
-      service: "Internet Services"
-    },
-    {
-      icon: "assets/images/job/Eslint.svg",
-      name: "Eslint",
-      service: "Internet Services"
-    },
-    {
-      icon: "assets/images/job/Gitlab.svg",
-      name: "Gitlab",
-      service: "Internet Services"
-    }
-  ];
-
-  constructor() { }
+  constructor(private companyService: CompanyService) {}
 
   ngOnInit(): void {
+    this.getAllCompanies();
   }
 
+  getAllCompanies(): void {
+    this.companyService.getAllCompanies().subscribe(
+      (companies: Company[]) => {
+        this.companies = companies;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
 }
