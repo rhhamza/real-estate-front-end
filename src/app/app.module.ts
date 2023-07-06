@@ -17,6 +17,7 @@ import { CompanyDetailsComponent } from './company-details/company-details.compo
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './core/services/user.service';
+import { AppointmentFormComponent } from './appointment-form/appointment-form.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { UserService } from './core/services/user.service';
     CalendarComponent,
     BlogsComponent,
     BlogDetailComponent,
-    CompanyDetailsComponent
+    CompanyDetailsComponent,
+    AppointmentFormComponent
   ],
   imports: [
     BrowserModule,
