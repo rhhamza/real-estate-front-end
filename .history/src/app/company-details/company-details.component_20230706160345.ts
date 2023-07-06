@@ -23,7 +23,6 @@ export class CompanyDetailsComponent implements OnInit {
     if (companyId !== null) {
       this.id = companyId;
       this.getCompanyDetails(companyId);
-      this.getCompanyImage(companyId);
     }
   }
   
