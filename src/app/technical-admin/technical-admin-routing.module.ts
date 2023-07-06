@@ -26,6 +26,10 @@ const routes: Routes = [
       {
         path: "create-offer",
         component: CreateOfferComponent
+      },
+      {
+        path: "update-offer/:offer",
+        component: CreateOfferComponent
       }
     ]
   }

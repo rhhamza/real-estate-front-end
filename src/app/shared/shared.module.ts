@@ -17,11 +17,54 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { NotifierModule } from 'angular-notifier';
+import { NotifierOptions } from 'angular-notifier';
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
   slidesPerView: 'auto'
 };
+
+const customNotifierOptions: NotifierOptions = {
+  position: {
+      horizontal: {
+          position: 'right',
+          distance: 20,
+      },
+      vertical: {
+          position: 'top',
+          distance: 100,
+          gap: 10,
+      },
+  },
+  theme: 'material',
+  behaviour: {
+      autoHide: 5000,
+      onClick: 'hide',
+      onMouseover: 'pauseAutoHide',
+      showDismissButton: true,
+      stacking: 4,
+  },
+  animations: {
+      enabled: true,
+      show: {
+          preset: 'slide',
+          speed: 300,
+          easing: 'ease',
+      },
+      hide: {
+          preset: 'fade',
+          speed: 300,
+          easing: 'ease',
+          offset: 50,
+      },
+      shift: {
+          speed: 300,
+          easing: 'ease',
+      },
+      overlap: 150,
+  },
+};
+
 
 @NgModule({
   declarations: [
@@ -38,7 +81,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     NgbNavModule,
     CarouselModule,
     RouterModule,
-    FullCalendarModule
+    FullCalendarModule,
+    NotifierModule.withConfig(customNotifierOptions),
   ],
   exports: [
     FeatherModule,
@@ -55,7 +99,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MatTableModule, 
     MatPaginatorModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NotifierModule
   ],
   providers: [
     {

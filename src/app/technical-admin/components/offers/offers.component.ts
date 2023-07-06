@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { map, switchMap, toArray } from 'rxjs';
+import { map, of, switchMap, toArray } from 'rxjs';
 import { IOffer } from 'src/app/core/interfaces/response';
 import { Offer } from 'src/app/core/models/offer';
 import { OfferService } from 'src/app/core/services/offer.service';
@@ -14,7 +14,7 @@ import { OfferService } from 'src/app/core/services/offer.service';
   styleUrls: ['./offers.component.scss']
 })
 export class OffersComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'title', 'reference', 'type', 'category', 'createdAt', 'updatedAt'];
+  displayedColumns: string[] = ['id', 'title', 'reference', 'type', 'category', 'createdAt', 'updatedAt', 'actions'];
   dataSource = new MatTableDataSource<Offer>
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -52,4 +52,10 @@ export class OffersComponent implements OnInit {
     }
   }
 
+  deleteOffer(offer: number) {
+    this.offerService.deleteOffer(offer).subscribe((response) => {
+      console.log(response);
+      
+    })
+  }
 }
