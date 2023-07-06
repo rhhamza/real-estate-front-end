@@ -5,7 +5,7 @@ import { allIcons } from 'angular-feather/icons';
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
-import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { ReviewTestmonialComponent } from './components/review-testmonial/review-testmonial.component';
 import { BlogComponent } from './components/blog/blog.component';
@@ -14,6 +14,8 @@ import { OfferCardComponent } from './components/offer-card/offer-card.component
 import { SwitcherComponent } from './components/switcher/switcher.component';
 import { CompanyCardComponent } from './components/company-card/company-card.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { HttpClientModule } from '@angular/common/http';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -35,7 +37,10 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     NgbNavModule,
     CarouselModule,
     RouterModule,
-    FullCalendarModule
+    FullCalendarModule,
+    HttpClientModule,
+    NgbModule,
+    NgbModalModule
   ],
   exports: [
     FeatherModule,
@@ -48,7 +53,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     OfferCardComponent,
     SwitcherComponent,
     CompanyCardComponent,
-    FullCalendarModule
+    FullCalendarModule,
+    NgbModalModule
   ],
   providers: [
     {

@@ -1,3 +1,36 @@
 .container {
     margin: 100px auto;
 }
+
+.meeting-link {
+    margin-top: 10px;
+  }
+  
+  .link-style {
+    color: #337ab7;
+    text-decoration: none;
+  }
+  
+  .link-style:hover {
+    text-decoration: underline;
+  }
+  .event-content {
+    background-color: #052c98;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .event-content:hover {
+    background-color: #9b1a1a;
+  }
+  
+  .event-time {
+    font-weight: bold;
+  }
+  
+  .event-title {
+    margin-top: 2px;
+  }
+  
