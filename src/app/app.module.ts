@@ -14,6 +14,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { BlogsComponent } from './blogs/blogs.component';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 import { CompanyDetailsComponent } from './company-details/company-details.component';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './core/services/user.service';
 
@@ -35,6 +36,7 @@ import { UserService } from './core/services/user.service';
     BrowserAnimationsModule,
     AppRoutingModule,
     LayoutsModule,
+    FormsModule,
     SharedModule,
     HttpClientModule
   ],
