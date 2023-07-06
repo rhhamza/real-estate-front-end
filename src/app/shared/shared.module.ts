@@ -14,6 +14,9 @@ import { OfferCardComponent } from './components/offer-card/offer-card.component
 import { SwitcherComponent } from './components/switcher/switcher.component';
 import { CompanyCardComponent } from './components/company-card/company-card.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableModule} from '@angular/material/table';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -48,7 +51,11 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     OfferCardComponent,
     SwitcherComponent,
     CompanyCardComponent,
-    FullCalendarModule
+    FullCalendarModule,
+    MatTableModule, 
+    MatPaginatorModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     {
