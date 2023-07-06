@@ -1,4 +1,4 @@
-export class AuthResponseDto {
+export class    AuthResponseDto {
     accessToken: string;
     tokenType: string;
   
