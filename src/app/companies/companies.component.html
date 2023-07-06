@@ -55,8 +55,8 @@
         <!--end row-->
 
         <div class="row">
-            <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2" *ngFor="let data of companysData">
-                <app-company-card [data]="data"></app-company-card>
+            <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2" *ngFor="let data of companies">
+                <app-company-card [company]="data"></app-company-card>
             </div>
             <div class="col-12 mt-4 pt-2">
                 <ul class="pagination justify-content-center mb-0">

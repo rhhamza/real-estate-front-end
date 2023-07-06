@@ -5,11 +5,15 @@ import { TechnicalAdminRoutingModule } from './technical-admin-routing.module';
 import { TechnicalAdminComponent } from './technical-admin.component';
 import { UsersComponent } from './components/users/users.component';
 import { SharedModule } from '../shared/shared.module';
+import { OffersComponent } from './components/offers/offers.component';
+import { CreateOfferComponent } from './components/create-offer/create-offer.component';
 
 @NgModule({
   declarations: [
     TechnicalAdminComponent,
-    UsersComponent
+    UsersComponent,
+    OffersComponent,
+    CreateOfferComponent
   ],
   imports: [
     CommonModule,
