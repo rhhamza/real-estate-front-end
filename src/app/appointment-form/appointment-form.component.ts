@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from
 import { AppointmentService } from '../core/services/appointment.service';
 import { IAppointment } from '../core/interfaces/AppointmentInterface';
 import { ActivatedRoute } from '@angular/router';
+import { NotifierService } from 'angular-notifier';
 @Component({
   selector: 'app-appointment-form',
   templateUrl: './appointment-form.component.html',
@@ -10,31 +11,37 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AppointmentFormComponent implements OnInit {
   AppoitmentForm!: FormGroup;
+  isOnline = false;
   submitted = false;
   offerId= this.activateRoute.snapshot.paramMap.get('offer');
 
-  constructor(private fb: FormBuilder,  private appointmentService: AppointmentService, private activateRoute: ActivatedRoute) {
+  constructor(private fb: FormBuilder,  private appointmentService: AppointmentService, private activateRoute: ActivatedRoute, private notifier: NotifierService
+    ) {
     this.AppoitmentForm = this.fb.group({
       title: ['', Validators.required],
       discrition: ['', Validators.required],
       dateDebut: ['', Validators.required],
       dateFin: ['', Validators.required,this.dateFinValidator()],
-      meetingLink: ['', Validators.required],
+      meetingLink: [''],
       online: [false, Validators.required],
-      location: [''],
+      location: [{ value: '', disabled:false }]
     });
   }
 
 
-  ngOnInit(): void {
+ ngOnInit(): void {/* 
 
-      this.AppoitmentForm.get('online')?.valueChanges.subscribe((value) => {
+    this.AppoitmentForm.get('online')?.valueChanges.subscribe((value) => {
+      const locationControl = this.AppoitmentForm.get('location');
       if (value) {
-        // If online is checked, clear the location field
-        this.AppoitmentForm.get('location')!.setValue('');
+        // If online is checked, disable the location control and clear its value
+        locationControl?.disable();
+        locationControl?.setValue('');
+      } else {
+        // If online is not checked, enable the location control
+        locationControl?.enable();
       }
-    });
-  
+    });*/
   }
   get f() { return this.AppoitmentForm?.controls; }
 
@@ -58,7 +65,13 @@ export class AppointmentFormComponent implements OnInit {
         setTimeout(() => {
           // Do something after the form submission
         }, 2000);
+        console.log(this.offerId)
         console.log(this.AppoitmentForm.value);
+      }, err => {
+        this.notifier.notify(
+          'error',
+          err.error.message
+        );
       });
     }
   dateFinValidator(): ValidatorFn {
@@ -78,5 +91,12 @@ export class AppointmentFormComponent implements OnInit {
       return null;
     };
   }
+  toggleOnline() {
+    this.isOnline = !this.isOnline;
+    if (!this.isOnline) {
+      this.AppoitmentForm.get('location')?.setValue('');
+    }
+  }
+
 
 }

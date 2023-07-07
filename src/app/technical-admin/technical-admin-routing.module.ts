@@ -8,6 +8,7 @@ import { CompaniesAdminComponent } from "./components/companies-admin/companies-
 import { OrderAdminComponent } from "./components/order-admin/order-admin.component";
 import { BadWordsComponent } from "./components/badwords/badwords.component";
 import { CreateBadWordComponent } from "./components/create-bad-word/create-bad-word.component";
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 const routes: Routes = [
   {
@@ -35,7 +36,10 @@ const routes: Routes = [
         path: "orders-admin",
         component: OrderAdminComponent,
       },
-
+      {
+        path: "calender",
+        component: CalendarComponent
+      },
       {
         path: "create-offer",
         component: CreateOfferComponent,

@@ -57,7 +57,10 @@ export class CreateOfferComponent implements OnInit {
 
       let body = {
         ...this.offerForm.value,
-        reference: this.generateRandomText(8)    
+        reference: this.generateRandomText(8),
+        user: {
+          id: 1
+        }
       }
 
       if (!this.offer) {
