@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { map, of, switchMap, toArray } from 'rxjs';
 import { IOffer } from 'src/app/core/interfaces/response';
 import { Offer } from 'src/app/core/models/offer';
@@ -18,10 +19,12 @@ export class OffersComponent implements OnInit {
   dataSource = new MatTableDataSource<Offer>
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-
+  offer?: Offer
+  offerId!: string;
   constructor(
     private offerService: OfferService,
-    private _liveAnnouncer: LiveAnnouncer
+    private _liveAnnouncer: LiveAnnouncer,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
@@ -52,10 +55,18 @@ export class OffersComponent implements OnInit {
     }
   }
 
-  deleteOffer(offer: number) {
+  deleteOffer(offer: string) {
     this.offerService.deleteOffer(offer).subscribe((response) => {
-      console.log(response);
-      
+      this.modalService.dismissAll()
+      this.readOffers()
+    }, err => {
+      this.modalService.dismissAll()
+      this.readOffers()
     })
+  }
+
+  openModal(content: any, offerId: string) {
+    this.offerId = offerId
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg' });
   }
 }

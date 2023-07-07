@@ -528,17 +528,18 @@
         <div class="row justify-content-center">
             <div class="col-12 text-center">
                 <div class="section-title mb-4 pb-2">
-                    <h4 class="title mb-4">Latest Blog & News</h4>
-                    <p class="text-muted para-desc mx-auto mb-0">Start working with <span
-                            class="text-primary fw-bold">Landrick</span> that can provide everything you need to
-                        generate awareness, drive traffic, connect.</p>
+                    <h4 class="title mb-4">Latest Offers</h4>
                 </div>
             </div>
             <!--end col-->
         </div>
         <!--end row-->
 
-        <app-blog [blogData]="blogData"></app-blog>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mt-4 pt-2" *ngFor="let offer of offers">
+                <app-offer-card [data]="offer"></app-offer-card>
+            </div>
+        </div>
     </div>
     <!--end container-->
 </section>

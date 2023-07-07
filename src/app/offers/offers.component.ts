@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { OfferService } from '../core/services/offer.service';
+import { map, switchMap, toArray } from 'rxjs';
+import { IOffer } from '../core/interfaces/response';
+import { Offer } from '../core/models/offer';
 
 @Component({
   selector: 'app-offers',
@@ -74,9 +78,24 @@ export class OffersComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  offers: Offer[] = []
+
+  constructor(
+    private offerService: OfferService
+  ) { }
 
   ngOnInit(): void {
+    this.readOffers()
+  }
+
+  readOffers () {
+    this.offerService.readAllOffers().pipe(
+      switchMap((offers: IOffer[]) => offers), 
+      map((offer: Offer) => new Offer(offer)),
+      toArray(),
+    ).subscribe((offers: Offer[]) => {
+      this.offers = offers
+    })
   }
 
 }
