@@ -1,4 +1,5 @@
 import { UserService } from './core/services/user.service';
+import { AppointmentFormComponent } from './appointment-form/appointment-form.component';
 import { CompanyService } from './core/services/company-service.service';
 import { CompaniesMgtComponent } from './companies-mgt/companies-mgt.component';
 import { NgModule } from "@angular/core";
@@ -39,6 +40,7 @@ import { OrdersPlanComponent } from './orders-plan/orders-plan.component';
     BlogsComponent,
     BlogDetailComponent,
     CompanyDetailsComponent,
+    AppointmentFormComponent,
     CompaniesMgtComponent,
     AddPublicationModalComponent,
     OrdersPlanComponent

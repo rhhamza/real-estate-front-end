@@ -9,8 +9,10 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { BlogsComponent } from './blogs/blogs.component';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 import { CompanyDetailsComponent } from './company-details/company-details.component';
+import { AppointmentFormComponent } from './appointment-form/appointment-form.component';
 import {CompaniesMgtComponent} from './companies-mgt/companies-mgt.component'
 import {  OrdersPlanComponent } from './orders-plan/orders-plan.component'
+
 const routes: Routes = [
   {
     path: '',
@@ -63,6 +65,10 @@ const routes: Routes = [
   {
     path: 'blogs/:blog',
     component: BlogDetailComponent
+  },
+  {
+    path: 'appointment/:offer',
+    component: AppointmentFormComponent
   },
   {
     path: 'admin',

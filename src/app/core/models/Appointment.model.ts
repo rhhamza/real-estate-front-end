@@ -1,3 +1,5 @@
+import { IAppointment } from "../interfaces/AppointmentInterface";
+
 export interface Appointment {
     idAppointment: number;
     title: string;
@@ -23,4 +25,17 @@ export interface Appointment {
   
   export interface PropertyOffer {
     // Define the properties of the PropertyOffer entity here
+  }
+  export class Appointment implements IAppointment {
+    constructor(
+      public idAppointment: number,
+      public title: string,
+      public discrition: string,
+      public dateDebut: string,
+      public dateFin: string,
+      public meetingLink: string,
+      public online: boolean,
+      public createdAt: string,
+      public updatedAt: string
+    ) {}
   }

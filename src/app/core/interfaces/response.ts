@@ -12,3 +12,4 @@ export interface IOffer {
     createdAt: string;
     updatedAt: string;
 }
+

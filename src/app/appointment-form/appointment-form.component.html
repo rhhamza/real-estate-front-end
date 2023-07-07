@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="card m-3">
+        <h5 class="card-header">Schudele an Appointment for this property </h5>
+        <div class="card-body">
+            <form [formGroup]="AppoitmentForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="form-group col-12">
+                        <label>Title</label>
+                        <input type="text" class="form-control" placeholder="Titre" formControlName="title" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+                        <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                            <div *ngIf="f.title.errors.required">Title is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group col-6">
+                        <label>Start date</label>
+                        <input type="datetime-local" formControlName="dateDebut" placeholder="start date" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.dateDebut.errors }" />
+                        <div *ngIf="submitted && f.dateDebut.errors" class="invalid-feedback">
+                            <div *ngIf="f.dateDebut.errors.required">Start dateis required</div>
+                        </div>
+                    </div> 
+                    <div class="form-group col-6">
+                        <label>End Date</label>
+                        <input type="datetime-local" class="form-control" placeholder="End Date" formControlName="dateFin" [ngClass]="{ 'is-invalid': submitted && f.dateFin.errors }">
+                        <div *ngIf="submitted && f.dateFin.errors" class="invalid-feedback">
+                            <div *ngIf="f.dateFin?.errors?.required" class="error-message">End date is required</div>
+                            <div *ngIf="f.dateFin?.errors?.rangeInvalid" class="error-message">End date should be greater than Start date and within 1 hour range</div>
+
+                        </div>
+                    </div>
+                 
+                    </div>
+                    <div class="form-group col-12">
+                        <label>Description</label>
+                        <textarea formControlName="discrition" class="form-control w-100" placeholder="Description" [ngClass]="{ 'is-invalid': submitted && f.discrition.errors }"></textarea>
+                        <div *ngIf="submitted && f.discrition.errors" class="invalid-feedback">
+                            <div *ngIf="f.discrition.errors.required">Description is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="online">Online</label>
+                        <input id="online" class="" type="checkbox" formControlName="online" />
+                    
+                        <div *ngIf="AppoitmentForm.get('online')?.value">
+                          <label for="location">Location</label>
+                          <input id="location" class="form-control" type="text" formControlName="location" />
+                        </div>
+                      </div>
+                     
+                <div class="d-flex justify-content-end mt-4">
+                    <button class="btn btn-primary mx-2" type="submit">Register</button>
+                    <a class="btn btn-secondary" type="reset" [routerLink]="['/admin','offers']">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
