@@ -2,7 +2,7 @@
 
 <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
+      <h4 class="modal-title" id="modal-basic-title">Demande !</h4>
       <button type="button" class="btn-close" aria-label="Close" (click)="modalService.dismissAll()"></button>
     </div>
     <div class="modal-body">
@@ -13,7 +13,7 @@
             <label class="form-label">Name <span class="text-danger">*</span></label>
             <div class="form-icon position-relative">
               <i-feather name="user" class="fea icon-sm icons"></i-feather>
-              <input type="text" class="form-control ps-5" placeholder="Company Name" formControlName="company_name" required>
+              <input type="text" class="form-control ps-5" placeholder="Company Name" formControlName="name" required>
             </div>
           </div>
         </div>
@@ -67,26 +67,10 @@
         <!-- Register button -->
         <div class="col-md-12">
           <div class="d-grid">
-            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="submit" class="btn btn-primary">Demande</button>
           </div>
         </div>
-  
-        <!-- Social signup options -->
-        <div class="col-lg-12 mt-4 text-center">
-            <h6>Or Signup With</h6>
-            <div class="row">
-              <div class="col-6 mt-3">
-                <div class="d-grid">
-                  <a href="javascript:void(0)" class="btn btn-light"><i class="mdi mdi-facebook text-primary"></i> Facebook</a>
-                </div>
-              </div>
-              <div class="col-6 mt-3">
-                <div class="d-grid">
-                  <a href="javascript:void(0)" class="btn btn-light"><i class="mdi mdi-google text-danger"></i> Google</a>
-                </div>
-              </div>
-            </div>
-          </div>
+        
         </form>
       </div>
     </ng-template>

@@ -27,11 +27,10 @@ export class CompanyRegisterComponent implements OnInit {
     public companyService: CompanyService
     ) { 
       this.registerForm = this.formBuilder.group({
-        company_name: ['', Validators.required],
+        name: ['', Validators.required],
         phone: ['', Validators.required],
         address: ['', Validators.required],
         email: ['', Validators.required],
-        password: ['', Validators.required],
     });
     }
 
@@ -70,7 +69,7 @@ export class CompanyRegisterComponent implements OnInit {
     this.registerForm.reset()
     this.notifier.notify(
       'success',
-      'Registered User with success'
+      'Registered Company with success'
     );
       this.modalService.dismissAll()
     }, err => { // 400 500 
