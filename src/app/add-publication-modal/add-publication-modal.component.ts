@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 // other imports
 
@@ -11,7 +12,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 export class AddPublicationModalComponent implements OnInit {
   publicationForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, public modalService: NgbModal) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -24,6 +25,12 @@ export class AddPublicationModalComponent implements OnInit {
     });
   }
 
+  openModal(content: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg' });
+    }
+    closeModal(): void {
+      this.modalService.dismissAll();
+    }
   createPublication(): void {
     if (this.publicationForm.valid) {
       // Get the form values and create the publication

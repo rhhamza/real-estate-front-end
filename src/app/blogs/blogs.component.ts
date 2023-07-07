@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { PublicationService } from "../core/services/publication.service";
 import { DatePipe } from "@angular/common";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 
 
@@ -17,14 +18,20 @@ export class BlogsComponent implements OnInit {
   constructor(
     private publicationService: PublicationService,
     private datePipe: DatePipe,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
     this.fetchPublications();
     this.createPublicationForm();
   }
-
+  openModal(content: any) {
+  this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg' });
+  }
+  closeModal(): void {
+    this.modalService.dismissAll();
+  }
   createPublicationForm(): void {
     this.publicationForm = this.formBuilder.group({
       title: ["", Validators.required],
