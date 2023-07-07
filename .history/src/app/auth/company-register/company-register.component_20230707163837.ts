@@ -44,20 +44,16 @@ export class CompanyRegisterComponent implements OnInit {
     }
   
   const company: ICompany = {
-    id: '', // Provide a default or placeholder value
     name: this.registerForm.get('company_name')?.value,
     phone: this.registerForm.get('phone')?.value,
     address: this.registerForm.get('address')?.value,
     email: this.registerForm.get('email')?.value,
-    logo: '', // Provide a default or placeholder value
-    status: 'PENDING',
-    description: '', // Provide a default or placeholder value
-    createdAt: '', // Provide a default or placeholder value
-    updatedAt: '', // Provide a default or placeholder value
+    status: 'PENDING'
     
   }; 
 
-  this.companyService.addCompany(company).subscribe(() => {    })
+  this.companyService.addCompany(company).subscribe(() => {    
+  })
   
 }
 

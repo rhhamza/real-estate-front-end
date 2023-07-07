@@ -25,9 +25,4 @@ export class Company {
     this.createdAt = data.createdAt 
     this.updatedAt = data.updatedAt
   } 
-
-
-
-
-
 }
