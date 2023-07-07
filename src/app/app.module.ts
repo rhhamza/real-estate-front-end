@@ -25,6 +25,8 @@ import { PublicationReactionService } from "./core/services/publication-reaction
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AddPublicationModalComponent } from "./add-publication-modal/add-publication-modal.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { OrdersPlanComponent } from './orders-plan/orders-plan.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +41,8 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     CompanyDetailsComponent,
     CompaniesMgtComponent,
     AddPublicationModalComponent,
+    OrdersPlanComponent
+    
   ],
   imports: [
     BrowserModule,

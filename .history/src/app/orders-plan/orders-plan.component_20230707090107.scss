@@ -1,0 +1,26 @@
+.premium-container {
+    background-color: #E1306C;
+    color: #FFFFFF;
+  }
+  
+  .standard-container {
+    background-color: #F56040;
+    color: #FFFFFF;
+  }
+  
+  .basic-container {
+    background-color: #FFC045;
+    color: #000000;
+  }
+  
+  .plan-title {
+    border-radius: 10px;
+    padding: 5px 10px;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .selected-plan {
+    background-color: #FF3366;
+    color: #FFFFFF;
+  }

@@ -1,0 +1,121 @@
+
+<div class="container">
+    <div>
+  <h2>Choose a Plan</h2>
+</div>
+<div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card mb-4" [ngClass]="{'selected-plan': selectedPlan === 'Premium'}" (click)="selectPlan('Premium')">
+        <div class="card-body">
+          <h3 class="card-title">
+            <span class="premium-title">Premium</span>
+          </h3>
+    
+          <ul class="list-unstyled">
+            <li class="list-item premium" (click)="selectPlan('Premium')">
+              <span class="checkmark">&#10003;</span>
+              <strong>Price</strong>
+              <br>
+              <span class="highlight">30$</span>
+            </li>
+            <li class="list-item premium" (click)="selectPlan('Premium')">
+              <span class="checkmark">&#10003;</span>
+              <strong>period of validity</strong>
+              <br>
+              <span class="highlight">30 Days</span>
+            </li>
+            <li class="list-item premium" (click)="selectPlan('Premium')">
+                
+              <span class="checkmark">&#10003;</span>
+              <strong>Properties</strong>
+              <br>
+              <span class="highlight">30</span>
+            </li>
+          </ul>
+          <div class="selected-label" *ngIf="selectedPlan === 'Premium'">
+            <span class="checkmark">&#10003;</span>Selected
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card mb-4" [ngClass]="{'selected-plan': selectedPlan === 'Standard'}" (click)="selectPlan('Standard')">
+        <div class="card-body">
+          <h3 class="card-title">
+            <span class="standard-title">Standard</span>
+          </h3>
+          <ul class="list-unstyled">
+            <li class="list-item standard" (click)="selectPlan('Standard')">
+                <span class="checkmark">&#10003;</span>
+                <strong>Price</strong>
+                <br>
+                <span class="highlight">20$</span>
+              </li>
+              <li class="list-item standard" (click)="selectPlan('Standard')">
+                <span class="checkmark">&#10003;</span>
+                <strong>Period of Validity</strong>
+                <br>
+                <span class="highlight">30 Days</span>
+              </li>
+              <li class="list-item standard" (click)="selectPlan('Standard')">
+                <span class="checkmark">&#10003;</span>
+                <strong>Properties</strong>
+                <br>
+                <span class="highlight">20</span>
+              </li>
+            </ul>
+            <div class="selected-label" *ngIf="selectedPlan === 'Standard'">
+              <span class="checkmark">&#10003;</span>Selected
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-md-4">
+        <div class="card mb-4" [ngClass]="{'selected-plan': selectedPlan === 'Basic'}" (click)="selectPlan('Basic')">
+          <div class="card-body">
+            <h3 class="card-title">
+              <span class="basic-title">Basic</span>
+            </h3>
+            <ul class="list-unstyled">
+              <li class="list-item basic" (click)="selectPlan('Basic')">
+                <span class="checkmark">&#10003;</span>
+                <strong>Price</strong>
+                <br>
+                <span class="highlight">10$</span>
+              </li>
+              <li class="list-item standard" (click)="selectPlan('Standard')">
+                <span class="checkmark">&#10003;</span>
+                <strong>Period Of Validity</strong>
+                <br>
+                <span class="highlight">30 Days</span>
+              </li>
+              <li class="list-item basic" (click)="selectPlan('Basic')">
+                
+                <span class="checkmark">&#10003;</span>
+                <strong>Properties</strong>
+                <br>
+                <span class="highlight">10</span>
+              </li>
+            </ul>
+            <div class="selected-label" *ngIf="selectedPlan === 'Basic'">
+              <span class="checkmark">&#10003;</span>Selected
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<div>
+    <p>HD (720p), Full HD (1080p), Ultra HD (4K) and HDR availability subject to your internet service and device capabilities. Not all content is available in all resolutions. See our Terms of Use for more details.
+        Only people who live with you may use your account. Watch on 4 different devices at the same time with Premium, 2 with Standard and 1 with Basic.
+        </p>
+</div>
+<div>
+    <button type="submit" class="next-button">Next</button>
+
+</div>
+    </div>
+    

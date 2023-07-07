@@ -7,13 +7,17 @@ import { UsersComponent } from './components/users/users.component';
 import { SharedModule } from '../shared/shared.module';
 import { OffersComponent } from './components/offers/offers.component';
 import { CreateOfferComponent } from './components/create-offer/create-offer.component';
+import { CompaniesAdminComponent } from './components/companies-admin/companies-admin.component';
+import { OrderAdminComponent } from './components/order-admin/order-admin.component';
 
 @NgModule({
   declarations: [
     TechnicalAdminComponent,
     UsersComponent,
     OffersComponent,
-    CreateOfferComponent
+    CreateOfferComponent,
+    CompaniesAdminComponent,
+    OrderAdminComponent
   ],
   imports: [
     CommonModule,

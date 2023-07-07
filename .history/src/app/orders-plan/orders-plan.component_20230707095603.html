@@ -1,0 +1,90 @@
+<div class="container">
+    <h2>Choose a Plan</h2>
+  
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card mb-4" [ngClass]="{'selected-plan': selectedPlan === 'Premium'}" (click)="selectPlan('Premium')">
+          <div class="card-body">
+            <h3 class="card-title">
+              <span class="premium-title">Premium</span>
+            </h3>
+            <p class="card-text price">$9.99</p>
+            <ul class="list-unstyled">
+              <li class="list-item">
+                <strong>Resolution:</strong>
+                <br>
+                <span class="highlight">4K (Ultra HD) + HDR</span>
+              </li>
+              <li class="list-item">
+                <strong>Video quality:</strong>
+                <br>
+                <span class="highlight">Best</span>
+              </li>
+              <li class="list-item">
+                <strong>Supported devices:</strong>
+                <br>
+                <span class="highlight">TV, computer, mobile phone, tablet</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-md-4">
+        <div class="card mb-4" [ngClass]="{'selected-plan': selectedPlan === 'Standard'}" (click)="selectPlan('Standard')">
+          <div class="card-body">
+            <h3 class="card-title">
+              <span class="standard-title">Standard</span>
+            </h3>
+            <p class="card-text price">$7.99</p>
+            <ul class="list-unstyled">
+              <li class="list-item">
+                <strong>Resolution:</strong>
+                <br>
+                <span class="highlight">1080p (Full HD)</span>
+              </li>
+              <li class="list-item">
+                <strong>Video quality:</strong>
+                <br>
+                <span class="highlight">Better</span>
+              </li>
+              <li class="list-item">
+                <strong>Supported devices:</strong>
+                <br>
+                <span class="highlight">TV, computer, mobile phone, tablet</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-md-4">
+        <div class="card mb-4" [ngClass]="{'selected-plan': selectedPlan === 'Basic'}" (click)="selectPlan('Basic')">
+          <div class="card-body">
+            <h3 class="card-title">
+              <span class="basic-title">Basic</span>
+            </h3>
+            <p class="card-text price">$3.99</p>
+            <ul class="list-unstyled">
+              <li class="list-item">
+                <strong>Resolution:</strong>
+                <br>
+                <span class="highlight">720p (HD)</span>
+              </li>
+              <li class="list-item">
+                <strong>Video quality:</strong>
+                <br>
+                <span class="highlight">Good</span>
+              </li>
+              <li class="list-item">
+                <strong>Supported devices:</strong>
+                <br>
+                <span class="highlight">TV, computer, mobile phone, tablet</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
