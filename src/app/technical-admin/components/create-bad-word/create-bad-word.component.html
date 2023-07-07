@@ -1,0 +1,35 @@
+<notifier-container></notifier-container>
+<div class="card m-3">
+  <h5 class="card-header">Create Property Offer</h5>
+  <div class="card-body">
+    <form [formGroup]="badWordForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="form-group col-12">
+          <label>Title</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Word"
+            formControlName="word"
+            [ngClass]="{ 'is-invalid': submitted && f.word.errors }"
+          />
+          <div *ngIf="submitted && f.word.errors" class="invalid-feedback">
+            <div *ngIf="f.word.errors.required">word is required</div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end mt-4">
+          <button class="btn btn-primary mx-2" type="submit">
+            {{ !badWord ? "Create Bad Word" : "Update Bad Word" }}
+          </button>
+          <a
+            class="btn btn-secondary"
+            type="reset"
+            [routerLink]="['/admin', 'badwords']"
+            >Retour</a
+          >
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

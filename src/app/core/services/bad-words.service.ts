@@ -7,7 +7,7 @@ import { BadWords } from "../models/bad-words.model";
   providedIn: "root",
 })
 export class BadWordsService {
-  private apiUrl = "/badwords"; // Adjust the API URL as per your backend endpoint
+  private apiUrl = "http://localhost:8089/Realstate/badwords"; // Adjust the API URL as per your backend endpoint
 
   constructor(private http: HttpClient) {}
 
