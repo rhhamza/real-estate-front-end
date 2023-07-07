@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { SwiperOptions } from 'swiper';
+import { OfferService } from '../core/services/offer.service';
+import { map, switchMap, toArray } from 'rxjs';
+import { Offer } from '../core/models/offer';
+import { IOffer } from '../core/interfaces/response';
 
 @Component({
   selector: 'app-home-page',
@@ -133,8 +137,23 @@ export class HomePageComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  offers: Offer[] = []
+
+  constructor(
+    private offerService: OfferService
+  ) { }
 
   ngOnInit(): void {
+    this.readLatestOffers()
+  }
+
+  readLatestOffers () {
+    this.offerService.readAllOffers().pipe(
+      switchMap((offers: IOffer[]) => offers), 
+      map((offer: Offer) => new Offer(offer)),
+      toArray(),
+    ).subscribe((offers: Offer[]) => {
+      this.offers = offers
+    })
   }
 }

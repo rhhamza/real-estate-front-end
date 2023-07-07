@@ -23,8 +23,8 @@ export class OfferService {
     return this.httpClient.put(this.backEndApi + offerId, body) as Observable<IOffer>;
   }  
 
-  deleteOffer(offerId: string): Observable<IOffer> {
-    return this.httpClient.delete(this.backEndApi + offerId) as Observable<IOffer>;
+  deleteOffer(offerId: string): Observable<String> {
+    return this.httpClient.delete(this.backEndApi + offerId) as Observable<String>;
   } 
   
   readAllOffers (): Observable<IOffer[]> {

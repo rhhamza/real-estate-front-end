@@ -4,7 +4,7 @@
         <div class="overlay rounded-top bg-dark"></div>
     </div>
     <div class="card-body content">
-        <h5><a href="javascript:void(0)" class="card-title title text-dark">{{data.title}}</a></h5>
+        <h5><a [routerLink]="['/offers', data.id]" class="card-title title text-dark">{{data.title}}</a></h5>
         <div class="post-meta d-flex justify-content-between mt-3">
             <ul class="list-unstyled mb-0">
                 <li class="list-inline-item me-2 mb-0"><a href="javascript:void(0)"
@@ -12,12 +12,12 @@
                 <li class="list-inline-item"><a href="javascript:void(0)" class="text-muted comments"><i
                             class="uil uil-comment me-1"></i>{{data.message}}</a></li>
             </ul>
-            <a [routerLink]="['/offers', 1]" class="text-muted readmore">Read More <i
+            <a [routerLink]="['/offers', data.id]" class="text-muted readmore">Read More <i
                     class="uil uil-angle-right-b align-middle"></i></a>
         </div>
     </div>
     <div class="author">
         <small class="text-light user d-block"><i class="uil uil-user"></i> {{data.name}}</small>
-        <small class="text-light date"><i class="uil uil-calendar-alt"></i> {{data.date}}</small>
+        <small class="text-light date"><i class="uil uil-calendar-alt"></i> {{data.createdAt  | date: 'medium'}}</small>
     </div>
 </div>
