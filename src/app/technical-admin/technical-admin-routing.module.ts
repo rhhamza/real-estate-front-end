@@ -4,6 +4,7 @@ import { TechnicalAdminComponent } from './technical-admin.component';
 import { UsersComponent } from './components/users/users.component';
 import { OffersComponent } from './components/offers/offers.component';
 import { CreateOfferComponent } from './components/create-offer/create-offer.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 const routes: Routes = [
   {
@@ -30,7 +31,11 @@ const routes: Routes = [
       {
         path: "update-offer/:offer",
         component: CreateOfferComponent
-      }
+      },
+      {
+        path: "calender",
+        component: CalendarComponent
+      },
     ]
   }
 ];
