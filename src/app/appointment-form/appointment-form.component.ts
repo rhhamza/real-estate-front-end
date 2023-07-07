@@ -4,6 +4,7 @@ import { AppointmentService } from '../core/services/appointment.service';
 import { IAppointment } from '../core/interfaces/AppointmentInterface';
 import { ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
+import { UserService } from '../core/services/user.service';
 @Component({
   selector: 'app-appointment-form',
   templateUrl: './appointment-form.component.html',
@@ -14,8 +15,13 @@ export class AppointmentFormComponent implements OnInit {
   isOnline = false;
   submitted = false;
   offerId= this.activateRoute.snapshot.paramMap.get('offer');
+  
 
-  constructor(private fb: FormBuilder,  private appointmentService: AppointmentService, private activateRoute: ActivatedRoute, private notifier: NotifierService
+  constructor(private fb: FormBuilder, 
+     private appointmentService: AppointmentService, 
+    private activateRoute: ActivatedRoute, 
+    private notifier: NotifierService,
+ 
     ) {
     this.AppoitmentForm = this.fb.group({
       title: ['', Validators.required],
@@ -24,7 +30,6 @@ export class AppointmentFormComponent implements OnInit {
       dateFin: ['', Validators.required,this.dateFinValidator()],
       meetingLink: [''],
       online: [false, Validators.required],
-      location: [{ value: '', disabled:false }]
     });
   }
 
@@ -56,7 +61,7 @@ export class AppointmentFormComponent implements OnInit {
       let body = {
         ...this.AppoitmentForm.value,
         propertyOffer: { id: this.offerId ? parseInt(this.offerId) : 0 },
-        user:  localStorage.getItem('userId'),
+        user:  Number(localStorage.getItem('userId')),
       }
 
       this.appointmentService.createAppointment(body).subscribe((response: IAppointment) => {
@@ -66,7 +71,7 @@ export class AppointmentFormComponent implements OnInit {
           // Do something after the form submission
         }, 2000);
         console.log(this.offerId)
-        
+      
         console.log(this.AppoitmentForm.value);
       }, err => {
         this.notifier.notify(
