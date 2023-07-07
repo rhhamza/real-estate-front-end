@@ -2,7 +2,7 @@ import { ICompany } from "../interfaces/company";
 import { StatusType } from "./user-entity.model";
 
 export class Company {
-  id: string;
+  id?: string;
   name: string;
   address: string;
   description: string;
@@ -14,7 +14,7 @@ export class Company {
   updatedAt: string;
   
   constructor (data: ICompany) {
-    this.id = data.id 
+  
     this.name = data.name
     this.address = data.address
     this.description = data.description
@@ -25,9 +25,4 @@ export class Company {
     this.createdAt = data.createdAt 
     this.updatedAt = data.updatedAt
   } 
-
-
-
-
-
 }

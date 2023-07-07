@@ -1,9 +1,7 @@
-<notifier-container></notifier-container>
-
 <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
-      <button type="button" class="btn-close" aria-label="Close" (click)="modalService.dismissAll()"></button>
+      <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
     </div>
     <div class="modal-body">
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="login-form mt-4">
@@ -52,7 +50,15 @@
         </div>
   
         <!-- Password -->
-        
+        <div class="col-md-12">
+          <div class="mb-3">
+            <label class="form-label">Password <span class="text-danger">*</span></label>
+            <div class="form-icon position-relative">
+              <i-feather name="key" class="fea icon-sm icons"></i-feather>
+              <input type="password" class="form-control ps-5" placeholder="Password" formControlName="password" required>
+            </div>
+          </div>
+        </div>
   
         <!-- Accept terms -->
         <div class="col-md-12">

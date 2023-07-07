@@ -4,7 +4,6 @@ import { IUserEntity } from 'src/app/core/interfaces/user.interface';
 import { UserService } from 'src/app/core/services/user.service';
 import { CompanyService } from 'src/app/core/services/company-service.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NotifierService } from 'angular-notifier';
 import { Company } from 'src/app/core/models/company.model';
 import {ICompany} from 'src/app/core/interfaces/company';
 @Component({
@@ -18,13 +17,7 @@ export class CompanyRegisterComponent implements OnInit {
 
   submitted = false;
  
-  constructor(
-    config: NgbModalConfig, 
-    public modalService: NgbModal, 
-    private formBuilder: FormBuilder, 
-    public userService: UserService,
-    private notifier: NotifierService,
-    public companyService: CompanyService
+  constructor(config: NgbModalConfig, private modalService: NgbModal, private formBuilder: FormBuilder, public companyService: CompanyService,
     ) { 
       this.registerForm = this.formBuilder.group({
         company_name: ['', Validators.required],
@@ -51,35 +44,17 @@ export class CompanyRegisterComponent implements OnInit {
     }
   
   const company: ICompany = {
-    id: '', // Provide a default or placeholder value
     name: this.registerForm.get('company_name')?.value,
     phone: this.registerForm.get('phone')?.value,
     address: this.registerForm.get('address')?.value,
     email: this.registerForm.get('email')?.value,
-    password: this.registerForm.get('password')?.value,
-    logo: '', // Provide a default or placeholder value
-    status: 'PENDING',
-    description: '', // Provide a default or placeholder value
-    createdAt: '', // Provide a default or placeholder value
-    updatedAt: '', // Provide a default or placeholder value
+    status: 'PENDING'
     
   }; 
- 
 
-  this.companyService.addCompany(company).subscribe(() => {
-    this.submitted = false;
-    this.registerForm.reset()
-    this.notifier.notify(
-      'success',
-      'Registered User with success'
-    );
-      this.modalService.dismissAll()
-    }, err => { // 400 500 
-      this.notifier.notify(
-        'error',
-        'User Exists'
-      );
-    })
+  this.companyService.addCompany(company).subscribe(() => {    
+  })
+  
 }
 
 }
