@@ -56,7 +56,7 @@ export class AppointmentFormComponent implements OnInit {
       let body = {
         ...this.AppoitmentForm.value,
         propertyOffer: { id: this.offerId ? parseInt(this.offerId) : 0 },
-        user: { id: 1 }
+        user:  localStorage.getItem('userId'),
       }
 
       this.appointmentService.createAppointment(body).subscribe((response: IAppointment) => {
@@ -66,6 +66,7 @@ export class AppointmentFormComponent implements OnInit {
           // Do something after the form submission
         }, 2000);
         console.log(this.offerId)
+        
         console.log(this.AppoitmentForm.value);
       }, err => {
         this.notifier.notify(

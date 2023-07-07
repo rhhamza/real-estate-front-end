@@ -12,6 +12,7 @@ import { OffersComponent } from './components/offers/offers.component';
 import { CreateOfferComponent } from './components/create-offer/create-offer.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 
+
 @NgModule({
   declarations: [
     TechnicalAdminComponent,
@@ -22,7 +23,8 @@ import { CalendarComponent } from './components/calendar/calendar.component';
     OrderAdminComponent,
     BadWordsComponent,
     CreateBadWordComponent,
-    CalendarComponent
+    CalendarComponent,
+
   ],
   imports: [CommonModule, TechnicalAdminRoutingModule, SharedModule],
 })
