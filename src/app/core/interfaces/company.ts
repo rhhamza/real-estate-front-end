@@ -6,6 +6,7 @@ export interface ICompany {
     address: string;
     logo: string;
     status: string;
+
     description: string;
     createdAt: string;
     updatedAt: string;

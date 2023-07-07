@@ -56,7 +56,6 @@ export class CompanyRegisterComponent implements OnInit {
     phone: this.registerForm.get('phone')?.value,
     address: this.registerForm.get('address')?.value,
     email: this.registerForm.get('email')?.value,
-    password: this.registerForm.get('password')?.value,
     logo: '', // Provide a default or placeholder value
     status: 'PENDING',
     description: '', // Provide a default or placeholder value
