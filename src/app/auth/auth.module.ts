@@ -8,14 +8,17 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActiveAccountComponent } from './active-account/active-account/active-account.component';
+import { CompanyRegisterComponent } from './company-register/company-register.component';
 
 
 @NgModule({
   declarations: [
+    CompanyRegisterComponent,
     LoginComponent,
     RegisterComponent,
     ResetPasswordComponent,
-    ActiveAccountComponent
+    ActiveAccountComponent,
+    
   ],
   imports: [
     CommonModule,

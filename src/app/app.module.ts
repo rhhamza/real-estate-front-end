@@ -20,6 +20,7 @@ import { UserService } from './core/services/user.service';
 import { CompanyService } from './core/services/company-service.service';
 import { CompanyCardComponent } from './shared/components/company-card/company-card.component';
 import { CompaniesMgtComponent } from './companies-mgt/companies-mgt.component';
+import { OrdersPlanComponent } from './orders-plan/orders-plan.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { CompaniesMgtComponent } from './companies-mgt/companies-mgt.component';
     BlogsComponent,
     BlogDetailComponent,
     CompanyDetailsComponent,
-    CompaniesMgtComponent
+    CompaniesMgtComponent,
+    OrdersPlanComponent
     
   ],
   imports: [

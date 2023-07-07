@@ -1,0 +1,249 @@
+<style>
+.premium-title,
+    .standard-title,
+    .basic-title {
+      color: #FFFFFF;
+      padding: 20px;
+      border-radius: 10px;
+      display: inline-block;
+      cursor: pointer;
+      width: 100%;
+      font-size: 24px;
+      transition: transform 0.3s ease;
+    }
+  
+    .premium-title {
+      background: linear-gradient(to top left, #1E519D, #D70D1F);
+    }
+  
+    .standard-title {
+      background: linear-gradient(to top left, #E1306C, #F56040);
+    }
+  
+    .basic-title {
+      background: linear-gradient(to top left, #204F9B, #A639D7);
+    }
+  
+    .selected-plan {
+      transform: scale(1.1);
+      z-index: 1;
+      box-shadow: 0px 3px 10px rgba(0, 0, 0, .25);
+    }
+  
+    .card {
+      transition: transform 0.3s ease;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+  
+    .card.selected-plan {
+      transform: scale(1.1);
+      box-shadow: 0px 3px 10px rgba(0, 0, 0, .25);
+      border-color: #888;
+    }
+  
+    .list-item {
+      position: relative;
+      padding-bottom: 10px;
+    }
+  
+    .list-item:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: #ccc;
+    }
+  
+    .list-item strong {
+      color: #888;
+    }
+  
+    .list-item .highlight {
+      color: #000;
+      font-weight: bold;
+    }
+  
+    .selected-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+    }
+  
+    .list-item .checkmark {
+      display: none;
+      margin-right: 5px;
+      color: #FF0000;
+    }
+  
+    .selected-plan .list-item .checkmark {
+      display: inline-block;
+    }
+  
+    .icon-container {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      text-align: center;
+      background-color: red;
+      margin-right: 5px;
+      transition: background-color 0.3s ease;
+    }
+  
+    .premium.selected .icon-container {
+      background-color: red;
+    }
+  
+    .standard.selected .icon-container {
+      background-color: purple;
+    }
+  
+    .basic.selected .icon-container {
+      background-color: blue;
+    }
+    .next-button {
+    background-color: #E50914;
+    color: #FFFFFF;
+    padding: 15px 30px;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    font-size: 18px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    width: 50%;
+  }
+
+  .next-button:hover {
+    background-color: #D70D1F;
+  }
+</style>
+<div class="container">
+    <div>
+  <h2>Choose a Plan</h2>
+</div>
+<div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card mb-4" [ngClass]="{'selected-plan': selectedPlan === 'Premium'}" (click)="selectPlan('Premium')">
+        <div class="card-body">
+          <h3 class="card-title">
+            <span class="premium-title">Premium</span>
+          </h3>
+          <p class="card-text price">$9.99</p>
+          <ul class="list-unstyled">
+            <li class="list-item premium" (click)="selectPlan('Premium')">
+              <span class="checkmark">&#10003;</span>
+              <strong>Resolution:</strong>
+              <br>
+              <span class="highlight">4K (Ultra HD) + HDR</span>
+            </li>
+            <li class="list-item premium" (click)="selectPlan('Premium')">
+              <span class="checkmark">&#10003;</span>
+              <strong>Video quality:</strong>
+              <br>
+              <span class="highlight">Best</span>
+            </li>
+            <li class="list-item premium" (click)="selectPlan('Premium')">
+                
+              <span class="checkmark">&#10003;</span>
+              <strong>Supported devices:</strong>
+              <br>
+              <span class="highlight">TV, computer, mobile phone, tablet</span>
+            </li>
+          </ul>
+          <div class="selected-label" *ngIf="selectedPlan === 'Premium'">
+            <span class="checkmark">&#10003;</span>Selected
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card mb-4" [ngClass]="{'selected-plan': selectedPlan === 'Standard'}" (click)="selectPlan('Standard')">
+        <div class="card-body">
+          <h3 class="card-title">
+            <span class="standard-title">Standard</span>
+          </h3>
+          <p class="card-text price">$7.99</p>
+          <ul class="list-unstyled">
+            <li class="list-item standard" (click)="selectPlan('Standard')">
+                <span class="checkmark">&#10003;</span>
+                <strong>Resolution:</strong>
+                <br>
+                <span class="highlight">1080p (Full HD)</span>
+              </li>
+              <li class="list-item standard" (click)="selectPlan('Standard')">
+                <span class="checkmark">&#10003;</span>
+                <strong>Video quality:</strong>
+                <br>
+                <span class="highlight">Better</span>
+              </li>
+              <li class="list-item standard" (click)="selectPlan('Standard')">
+                <span class="checkmark">&#10003;</span>
+                <strong>Supported devices:</strong>
+                <br>
+                <span class="highlight">TV, computer, mobile phone, tablet</span>
+              </li>
+            </ul>
+            <div class="selected-label" *ngIf="selectedPlan === 'Standard'">
+              <span class="checkmark">&#10003;</span>Selected
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-md-4">
+        <div class="card mb-4" [ngClass]="{'selected-plan': selectedPlan === 'Basic'}" (click)="selectPlan('Basic')">
+          <div class="card-body">
+            <h3 class="card-title">
+              <span class="basic-title">Basic</span>
+            </h3>
+            <p class="card-text price">$3.99</p>
+            <ul class="list-unstyled">
+              <li class="list-item basic" (click)="selectPlan('Basic')">
+                <span class="checkmark">&#10003;</span>
+                <strong>Resolution:</strong>
+                <br>
+                <span class="highlight">720p (HD)</span>
+              </li>
+              <li class="list-item standard" (click)="selectPlan('Standard')">
+                <span class="checkmark">&#10003;</span>
+                <strong>Video quality:</strong>
+                <br>
+                <span class="highlight">Good</span>
+              </li>
+              <li class="list-item basic" (click)="selectPlan('Basic')">
+                
+                <span class="checkmark">&#10003;</span>
+                <strong>Supported devices:</strong>
+                <br>
+                <span class="highlight">TV, computer, mobile phone, tablet</span>
+              </li>
+            </ul>
+            <div class="selected-label" *ngIf="selectedPlan === 'Basic'">
+              <span class="checkmark">&#10003;</span>Selected
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<div>
+    <p>HD (720p), Full HD (1080p), Ultra HD (4K) and HDR availability subject to your internet service and device capabilities. Not all content is available in all resolutions. See our Terms of Use for more details.
+        Only people who live with you may use your account. Watch on 4 different devices at the same time with Premium, 2 with Standard and 1 with Basic.
+        </p>
+</div>
+<div>
+    <button type="submit" class="next-button">Next</button>
+
+</div>
+    </div>
+    

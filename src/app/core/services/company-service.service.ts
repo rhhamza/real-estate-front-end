@@ -2,17 +2,18 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Company } from "../models/company.model";
+import { ICompany } from "../interfaces/company";
 
 @Injectable({
   providedIn: "root",
 })
 export class CompanyService {
-  private apiUrl = "http://localhost:8091/Realstate/company"; // Adjust the API URL as per your backend endpoint
+  private apiUrl = "http://localhost:8089/Realstate/company"; // Adjust the API URL as per your backend endpoint
  
   constructor(private http: HttpClient) {}
 
-  getAllCompanies(): Observable<Company[]> {
-    return this.http.get<Company[]>(`${this.apiUrl}/all`);
+  getAllCompanies(): Observable<ICompany[]> {
+    return this.http.get<ICompany[]>(`${this.apiUrl}/all`);
   }
 
   getCompanyById(id: string): Observable<Company> {

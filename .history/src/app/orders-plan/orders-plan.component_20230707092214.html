@@ -1,0 +1,106 @@
+<style>
+    .premium-title {
+      background-color: #E1306C;
+      color: #FFFFFF;
+      padding: 10px;
+      border-radius: 10px;
+      display: inline-block;
+      cursor: pointer;
+      width: 100%;
+    }
+    
+    .standard-title {
+      background-color: #F56040;
+      color: #FFFFFF;
+      padding: 10px;
+      border-radius: 10px;
+      display: inline-block;
+      cursor: pointer;
+      width: 100%;
+    }
+    
+    .basic-title {
+      background-color: #FFC045;
+      color: #000000;
+      padding: 10px;
+      border-radius: 10px;
+      display: inline-block;
+      cursor: pointer;
+      width: 100%;
+    }
+    
+    .selected-plan {
+      background-color: #FF3366;
+      color: #FFFFFF;
+    }
+  
+    .list-item {
+      position: relative;
+      padding-bottom: 10px;
+    }
+  
+    .list-item:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: #ccc;
+    }
+  </style>
+  
+  <div class="container">
+    <h2>Choose a Plan</h2>
+  
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card mb-4" (click)="selectPlan('Premium')">
+          <div class="card-body">
+            <h3 class="card-title">
+              <span class="premium-title" [ngClass]="{'selected-plan': selectedPlan === 'Premium'}">Premium</span>
+            </h3>
+            <p class="card-text price">$9.99</p>
+            <ul class="list-unstyled">
+              <li class="list-item"><strong>Resolution:</strong> 4K (Ultra HD) + HDR</li>
+              <li class="list-item"><strong>Video quality:</strong> Best</li>
+              <li class="list-item"><strong>Supported devices:</strong> TV, computer, mobile phone, tablet</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-md-4">
+        <div class="card mb-4" (click)="selectPlan('Standard')">
+          <div class="card-body">
+            <h3 class="card-title">
+              <span class="standard-title" [ngClass]="{'selected-plan': selectedPlan === 'Standard'}">Standard</span>
+            </h3>
+            <p class="card-text price">$7.99</p>
+            <ul class="list-unstyled">
+              <li class="list-item"><strong>Resolution:</strong> 1080p (Full HD)</li>
+              <li class="list-item"><strong>Video quality:</strong> Better</li>
+              <li class="list-item"><strong>Supported devices:</strong> TV, computer, mobile phone, tablet</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-md-4">
+        <div class="card mb-4" (click)="selectPlan('Basic')">
+          <div class="card-body">
+            <h3 class="card-title">
+              <span class="basic-title" [ngClass]="{'selected-plan': selectedPlan === 'Basic'}">Basic</span>
+            </h3>
+            <p class="card-text price">$3.99</p>
+            <ul class="list-unstyled">
+              <li class="list-item"><strong>Resolution:</strong> 720p (HD)</li>
+              <li class="list-item"><strong>Video quality:</strong> Good</li>
+              <li class="list-item"><strong>Supported devices:</strong> TV, computer, mobile phone, tablet</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
