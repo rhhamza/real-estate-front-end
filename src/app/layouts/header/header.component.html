@@ -296,8 +296,8 @@
         </a>
       </div>
   
-      <span *ngIf="!buttonList && !isdeveloper && !shopPages">
-        <div class="buy-button">
+      <span *ngIf="!buttonList && !isdeveloper && !shopPages" >
+        <div class="buy-button"  *ngIf="!userService.isAuthenticated();">
           <ng-template [ngIf]="navClass === 'nav-light'">
             <a [routerLink]="['/auth', 'login']" class="btn btn-primary">Login</a>
             <a [routerLink]="['/auth', 'login']" class="btn btn-primary">Login</a>
@@ -334,7 +334,7 @@
           <li><a [routerLink]="['chat']" class="nav-link-ref">Chat</a></li>
         </ul>
         <!--end navigation menu-->
-        <div class="buy-menu-btn d-none">
+        <div class="buy-menu-btn d-none" *ngIf="userService.isAuthenticated()">
           <a [routerLink]="['/auth', 'login']" class="btn btn-primary">Login</a>
         </div>
         <!--end login button-->

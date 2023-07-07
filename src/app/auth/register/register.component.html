@@ -1,4 +1,6 @@
   <!-- Hero Start -->
+  <notifier-container></notifier-container>
+
   <section class="bg-auth-home d-table w-100">
     <div class="container">
       <div class="row align-items-center">
@@ -13,7 +15,7 @@
               <h4 class="card-title text-center">Signup</h4>
               <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="login-form mt-4">
                 <!-- First name -->
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <div class="mb-3">
                     <label class="form-label">First name <span class="text-danger">*</span></label>
                     <div class="form-icon position-relative">
@@ -24,7 +26,7 @@
                 </div>
                 
                 <!-- Last name -->
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <div class="mb-3">
                     <label class="form-label">Last name <span class="text-danger">*</span></label>
                     <div class="form-icon position-relative">
@@ -70,7 +72,7 @@
                 <!-- Register button -->
                 <div class="col-md-12">
                   <div class="d-grid">
-                    <button type="submit" class="btn btn-primary">Register</button>
+                    <button type="submit" class="btn btn-primary mb-2">Register</button>
                   </div>
                 </div>
 

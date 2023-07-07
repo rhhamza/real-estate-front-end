@@ -32,7 +32,12 @@ export class UserService {
  
   resetPassword(email: string): Observable<string> {
     const resetPasswordData: ResetPassword = { email: email };
-    return this.http.post<string>(`${this.apiUrl}/reset-password`, resetPasswordData);
-  
+    return this.http.post<string>(`${this.apiUrl}/reset-password`, resetPasswordData); 
+  }
+
+  isAuthenticated (): boolean {
+    let userId = localStorage.getItem('userId') || null
+    if (userId) return true;
+    return false;
   }
 }

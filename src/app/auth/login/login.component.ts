@@ -49,10 +49,14 @@ onSubmit() {
   };
   this.subscription = this.userService.login(user).subscribe(
     (data: AuthResponseDto) => {
-      console.log(data);
-      
       localStorage.setItem('accessToken', data.accessToken);
       localStorage.setItem('userId', data.userid);  
+
+      if ( data.userid == "14" ) {
+        this.router.navigate(['/admin/offers'])
+      } else {
+        this.router.navigate([''])
+      }
     },
     (error: any) => {
       // Login failed

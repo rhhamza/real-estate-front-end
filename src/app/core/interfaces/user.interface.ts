@@ -5,6 +5,7 @@ export interface IUserEntity{
   lastname?: string;
   phone?: string;
   address?: string;
+  status: string;
   email?: string;
   password?: string;
 

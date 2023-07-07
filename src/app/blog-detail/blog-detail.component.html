@@ -3,26 +3,20 @@
     <div class="row justify-content-center">
       <div class="col-lg-12 text-center">
         <div class="page-next-level">
-          <h2>Design your apps in your own way</h2>
+          <h2>{{ publication.title }}</h2>
           <ul class="list-unstyled mt-4">
             <li class="list-inline-item h6 user text-muted me-2">
-              <i class="mdi mdi-account"></i> Calvin Carlo
+              <i class="mdi mdi-account"></i> Wael Keefi
             </li>
             <li class="list-inline-item h6 date text-muted">
-              <i class="mdi mdi-calendar-check"></i> 13th August, 2019
+              <i class="mdi mdi-calendar-check"></i> {{ publication.createdAt | date: 'medium'}}
             </li>
           </ul>
           <div class="page-next">
             <nav aria-label="breadcrumb" class="d-inline-block">
               <ul class="breadcrumb bg-white rounded shadow mb-0">
                 <li class="breadcrumb-item">
-                  <a routerLink="/index">Landrick</a>
-                </li>
-                <li class="breadcrumb-item">
-                  <a href="javascript:void(0)">Page</a>
-                </li>
-                <li class="breadcrumb-item">
-                  <a href="javascript:void(0)">Blog</a>
+                  <a [routerLink]="['/blogs']">Blog</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
                   Blog Detail

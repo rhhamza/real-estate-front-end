@@ -3,6 +3,7 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IUserEntity } from 'src/app/core/interfaces/user.interface';
 import { UserService } from 'src/app/core/services/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-company-register',
@@ -15,7 +16,12 @@ export class CompanyRegisterComponent implements OnInit {
 
   submitted = false;
  
-  constructor(config: NgbModalConfig, private modalService: NgbModal, private formBuilder: FormBuilder, public userService: UserService,
+  constructor(
+    config: NgbModalConfig, 
+    public modalService: NgbModal, 
+    private formBuilder: FormBuilder, 
+    public userService: UserService,
+    private notifier: NotifierService
     ) { 
       this.registerForm = this.formBuilder.group({
         first_name: ['', Validators.required],
@@ -47,9 +53,22 @@ export class CompanyRegisterComponent implements OnInit {
     address: this.registerForm.get('address')?.value,
     email: this.registerForm.get('email')?.value,
     password: this.registerForm.get('password')?.value,
+    status: 'INACTIVE'
     
   }; 
-  this.userService.registerUser(user).subscribe(() => {    
+  this.userService.registerUser(user).subscribe(() => {  // 200
+    this.submitted = false;
+    this.registerForm.reset()
+    this.notifier.notify(
+      'success',
+      'Registered User with success'
+    );
+      this.modalService.dismissAll()
+  }, err => { // 400 500 
+    this.notifier.notify(
+      'error',
+      'User Exists'
+    );
   })
 }
 

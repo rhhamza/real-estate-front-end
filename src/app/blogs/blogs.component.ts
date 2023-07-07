@@ -3,6 +3,8 @@ import { PublicationService } from "../core/services/publication.service";
 import { DatePipe } from "@angular/common";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { NotifierService } from "angular-notifier";
+import { UserService } from "../core/services/user.service";
 
 
 
@@ -19,7 +21,9 @@ export class BlogsComponent implements OnInit {
     private publicationService: PublicationService,
     private datePipe: DatePipe,
     private formBuilder: FormBuilder,
-    public modalService: NgbModal
+    public modalService: NgbModal,
+    private notifier: NotifierService,
+    public userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -76,23 +80,30 @@ export class BlogsComponent implements OnInit {
       return;
     }
 
-    const userId = 1; // Replace with the actual user ID
+    const userId = localStorage.getItem('userId'); // Replace with the actual user ID
     const publication = {
       title: this.publicationForm.value.title,
       content: this.publicationForm.value.content,
       // Assign other form field values to the corresponding publication properties
     };
 
-    this.publicationService.createPublication(publication, userId).subscribe(
-      (newPublication) => {
-        console.log("New publication:", newPublication);
-        // Reset the form after successful submission
-        this.publicationForm.reset();
-        this.fetchPublications();
-      },
-      (error) => {
-        console.error("Error creating publication:", error);
-      }
-    );
+    if (userId) {
+      this.publicationService.createPublication(publication, userId).subscribe(
+        (newPublication) => {
+          console.log("New publication:", newPublication);
+          this.notifier.notify(
+            'success',
+            'Blog Suuccessfully Added'
+          );
+          // Reset the form after successful submission
+          this.publicationForm.reset();
+          this.fetchPublications();
+          this.modalService.dismissAll()
+        },
+        (error) => {
+          console.error("Error creating publication:", error);
+        }
+      );
+    }
   }
 }

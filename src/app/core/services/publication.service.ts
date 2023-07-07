@@ -23,7 +23,7 @@ export class PublicationService {
 
   createPublication(
     publication: Publication,
-    userId: number
+    userId: string
   ): Observable<Publication> {
     return this.http.post<Publication>(
       `${this.baseUrl}/add/${userId}`,

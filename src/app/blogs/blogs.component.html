@@ -1,4 +1,5 @@
 <!-- Hero Start -->
+<notifier-container></notifier-container>
 
 <!-- Hero Start -->
 <section class="bg-half bg-light d-table w-100" id="home">
@@ -10,12 +11,6 @@
           <div class="page-next">
             <nav aria-label="breadcrumb" class="d-inline-block">
               <ul class="breadcrumb bg-white rounded shadow mb-0">
-                <li class="breadcrumb-item">
-                  <a routerLink="/index">Landrick</a>
-                </li>
-                <li class="breadcrumb-item">
-                  <a href="javascript:void(0)">Page</a>
-                </li>
                 <li class="breadcrumb-item">
                   <a href="javascript:void(0)">Blog</a>
                 </li>
@@ -52,6 +47,7 @@
   <div class="container">
     <div class="d-flex justify-content-end">
       <button
+        *ngIf="userService.isAuthenticated()"
         type="button"
         class="btn btn-success mb-2"
         (click)="openModal(modalBasicContent)"
@@ -183,12 +179,6 @@
             <a class="page-link" href="javascript:void(0)">1</a>
           </li>
           <li class="page-item">
-            <a class="page-link" href="javascript:void(0)">2</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="javascript:void(0)">3</a>
-          </li>
-          <li class="page-item">
             <a class="page-link" href="javascript:void(0)" aria-label="Next"
               >Next</a
             >
@@ -207,7 +197,7 @@
 
 <ng-template #modalBasicContent let-modal="">
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Appointment Details</h4>
+    <h4 class="modal-title" id="modal-basic-title">Ajouter un Blog</h4>
     <button
       type="button"
       class="btn-close"
