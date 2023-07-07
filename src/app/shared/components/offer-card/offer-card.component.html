@@ -1,6 +1,6 @@
 <div class="card blog rounded border-0 shadow overflow-hidden">
     <div class="position-relative">
-        <img src="{{data.image}}" class="card-img-top" alt="...">
+        <img src="/assets/images/1.jpg" class="card-img-top" alt="...">
         <div class="overlay rounded-top bg-dark"></div>
     </div>
     <div class="card-body content">
@@ -12,8 +12,10 @@
                 <li class="list-inline-item"><a href="javascript:void(0)" class="text-muted comments"><i
                             class="uil uil-comment me-1"></i>{{data.message}}</a></li>
             </ul>
-            <a [routerLink]="['/offers', data.id]" class="text-muted readmore">Read More <i
-                    class="uil uil-angle-right-b align-middle"></i></a>
+            <a [routerLink]="['/offers', data.id]" class="text-muted readmore">
+                Read More
+                <i class="uil uil-angle-right-b align-middle"></i>
+            </a>
         </div>
     </div>
     <div class="author">
