@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AuthResponseDto } from 'src/app/core/models/AuthResponseDto .model';
+import { AuthResponseDto } from 'src/app/core/models/AuthResponseDto.model';
 import { UserLogin } from 'src/app/core/models/login.model';
 import { UserService } from 'src/app/core/services/user.service';
 
@@ -49,7 +49,10 @@ onSubmit() {
   };
   this.subscription = this.userService.login(user).subscribe(
     (data: AuthResponseDto) => {
+      console.log(data);
+      
       localStorage.setItem('accessToken', data.accessToken);
+      localStorage.setItem('userId', data.userid);  
     },
     (error: any) => {
       // Login failed
