@@ -64,7 +64,7 @@
                 <li class="list-inline-item date text-muted"><i class="uil uil-calendar-alt text-dark"></i> {{ offer.createdAt | date: 'medium'}}</li>
               </ul>
   
-              <img src="assets/images/blog/bg1.jpg" class="img-fluid rounded-md shadow" alt="">
+              <img [src]="offer.picture" class="img-fluid rounded-md shadow w-100" alt="">
   
               <h5 class="mt-4">{{ offer.title }}</h5>
   

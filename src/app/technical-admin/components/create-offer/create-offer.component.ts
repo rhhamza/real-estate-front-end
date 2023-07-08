@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Offer } from 'src/app/core/models/offer';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Address } from 'ngx-google-places-autocomplete/objects/address';
 
 @Component({
   selector: 'app-create-offer',
@@ -49,6 +50,18 @@ export class CreateOfferComponent implements OnInit {
   
   }
 
+  options: any = {
+    componentRestrictions: { country: 'TN' }
+  }  
+  address?: Address
+
+  handleAddressChange(address: Address) {
+    this.address = address
+    console.log(address.formatted_address)
+    console.log(address.geometry.location.lat())
+    console.log(address.geometry.location.lng())
+  }
+
   // convenience getter for easy access to form fields
   get f() { return this.offerForm?.controls; }
 
@@ -63,12 +76,11 @@ export class CreateOfferComponent implements OnInit {
         ...this.offerForm.value,
         picture: this.base64,
         reference: this.generateRandomText(8),
+        location: this.address?.formatted_address,
         user: {
           id: 1
         }
       }
-
-      console.log(body);
       
 
       let userid = localStorage.getItem('userId')
@@ -85,14 +97,12 @@ export class CreateOfferComponent implements OnInit {
           
         })
       } else {      
-        console.log("tes");
-          
-        this.offerService.updateOffer(this.offer.id, this.offerForm.value).subscribe((response: IOffer) => {
+
+        this.offerService.updateOffer(this.offer.id, body).subscribe((response: IOffer) => {
           this.notifier.notify(
             'success',
             'Offer succesfully Updated'
           );
-
         })
       }
    

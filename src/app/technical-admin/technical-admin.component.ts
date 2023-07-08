@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { EventData } from 'ngx-event-calendar/lib/interface/event-data';
 
 export const testData: EventData[] = [
@@ -41,7 +42,9 @@ export const testData: EventData[] = [
 })
 export class TechnicalAdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
@@ -52,4 +55,9 @@ export class TechnicalAdminComponent implements OnInit {
   }
   
 
+  logout() {
+    localStorage.removeItem('userId')
+    localStorage.removeItem('accessToken')
+    this.router.navigate([''])
+  }
 }

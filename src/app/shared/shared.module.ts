@@ -22,6 +22,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotifierModule } from 'angular-notifier';
 import { NotifierOptions } from 'angular-notifier';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete'; 
+
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
   slidesPerView: 'auto'
@@ -88,7 +90,8 @@ const customNotifierOptions: NotifierOptions = {
     NotifierModule.withConfig(customNotifierOptions),
     HttpClientModule,
     NgbModule,
-    NgbModalModule
+    NgbModalModule,
+    GooglePlaceModule
   ],
   exports: [
     FeatherModule,
@@ -108,7 +111,8 @@ const customNotifierOptions: NotifierOptions = {
     FormsModule,
     ReactiveFormsModule,
     NotifierModule,
-    ImageCropperModule
+    ImageCropperModule,
+    GooglePlaceModule
   ],
   providers: [
     {

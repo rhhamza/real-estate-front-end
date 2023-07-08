@@ -52,7 +52,7 @@ onSubmit() {
       localStorage.setItem('accessToken', data.accessToken);
       localStorage.setItem('userId', data.userid);  
 
-      if ( data.userid == "14" ) {
+      if ( data.userid == "1" ) {
         this.router.navigate(['/admin/offers'])
       } else {
         this.router.navigate([''])
