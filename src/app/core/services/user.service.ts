@@ -20,6 +20,9 @@ export class UserService {
   registerUser(user: IUserEntity): Observable<UserEntity> {
     return this.http.post<UserEntity>(`${this.apiUrl}/registerclient`, user);
   }
+  registerCompany(user: UserEntity): Observable<UserEntity> {
+    return this.http.post<UserEntity>(`${this.apiUrl}/registerclient`, user);
+  }
 
   activeUser(id: number): Observable<UserEntity> {
     return this.http.post<UserEntity>(`${this.apiUrl}/activeAccount?id=${id}`, null);

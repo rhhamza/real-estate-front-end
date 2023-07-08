@@ -1,4 +1,9 @@
+<div class="d-flex justify-content-end m-3">
+  <a  (click)="open(content)" class="btn btn-primary">Create Order</a>
+</div>
+
 <div class="card m-3">
+
   <h5 class="card-header">Orders</h5>
 
   <div class="mat-elevation-z8">
@@ -65,3 +70,76 @@
     </mat-paginator>
   </div>
 </div>
+
+
+<notifier-container></notifier-container>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Demande !</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modalService.dismissAll()"></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="orderForm" (ngSubmit)="onSubmit()" class="login-form mt-4">
+        <!-- company name -->
+        <div class="col-md-12">
+          <div class="mb-3">
+            <label class="form-label">Start Date <span class="text-danger">*</span></label>
+            <div class="form-icon position-relative">
+              <i-feather name="user" class="fea icon-sm icons"></i-feather>
+              <input type="date" class="form-control ps-5" placeholder="Start date" formControlName="start_date" required>
+            </div>
+          </div>
+        </div>
+  
+        <!-- phone -->
+        <div class="col-md-12">
+          <div class="mb-3">
+            <label class="form-label">End Date <span class="text-danger">*</span></label>
+            <div class="form-icon position-relative">
+              <i-feather name="user-check" class="fea icon-sm icons"></i-feather>
+              <input type="date" class="form-control ps-5" placeholder="End Date" formControlName="end_date" required>
+            </div>
+          </div>
+        </div>
+
+        <!-- address -->
+        <div class="col-md-12">
+          <div class="mb-3">
+            <label class="form-label">Price <span class="text-danger">*</span></label>
+            <div class="form-icon position-relative">
+              <i-feather name="user-check" class="fea icon-sm icons"></i-feather>
+              <input type="number" class="form-control ps-5" placeholder="Price" formControlName="price" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="mb-3">
+            <label class="form-label">Company <span class="text-danger">*</span></label>
+            <div class="form-icon position-relative">
+              <select formControlName="company" class="form-control">
+                <option [value]="company.id" *ngFor="let company of companies">{{ company.name }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Email -->
+        
+  
+        <!-- Password -->
+        
+
+  
+        <!-- Register button -->
+        <div class="col-md-12">
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Create Order</button>
+          </div>
+        </div>
+        
+        </form>
+      </div>
+    </ng-template>
+  

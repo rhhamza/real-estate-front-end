@@ -8,7 +8,8 @@ import { CompaniesAdminComponent } from "./components/companies-admin/companies-
 import { OrderAdminComponent } from "./components/order-admin/order-admin.component";
 import { BadWordsComponent } from "./components/badwords/badwords.component";
 import { CreateBadWordComponent } from "./components/create-bad-word/create-bad-word.component";
-import { CalendarComponent } from './components/calendar/calendar.component';
+import { CreateCompanyComponent} from "./components/create-company/create-company.component"
+import { UpdateCompanyComponent } from "./components/update-company/update-company.component";import { CalendarComponent } from './components/calendar/calendar.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,12 @@ const routes: Routes = [
         path: "users",
         component: UsersComponent,
       },
+      {
+        path: "create-company",
+        component:  CreateCompanyComponent,
+      },
+
+     
       {
         path: "offers",
         component: OffersComponent,
@@ -43,6 +50,10 @@ const routes: Routes = [
       {
         path: "create-offer",
         component: CreateOfferComponent,
+      },
+      {
+        path: "update-company/:company",
+        component: CreateCompanyComponent,
       },
       {
         path: "update-offer/:offer",

@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NotifierService } from 'angular-notifier';
 import { Subscription } from 'rxjs';
 import { AuthResponseDto } from 'src/app/core/models/AuthResponseDto.model';
 import { UserLogin } from 'src/app/core/models/login.model';
@@ -20,7 +21,8 @@ private subscription: Subscription = new Subscription();
 constructor(
   private userService: UserService,
   private router: Router,
-  private formBuilder: FormBuilder
+  private formBuilder: FormBuilder,
+  private notifier: NotifierService
 ) {
   this.registerForm = this.formBuilder.group({
     email: ['', Validators.required],
@@ -52,7 +54,7 @@ onSubmit() {
       localStorage.setItem('accessToken', data.accessToken);
       localStorage.setItem('userId', data.userid);  
 
-      if ( data.userid == "14" ) {
+      if ( data.userid == "1" ) {
         this.router.navigate(['/admin/offers'])
       } else {
         this.router.navigate([''])
@@ -61,6 +63,10 @@ onSubmit() {
     (error: any) => {
       // Login failed
       this.errorMessage = 'Invalid credentials';
+      this.notifier.notify(
+        'error',
+        this.errorMessage
+      );
     }
   );
 }

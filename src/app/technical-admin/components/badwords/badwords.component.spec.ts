@@ -1,23 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { BadwordsComponent } from './badwords.component';
+import { BadWordsComponent } from "./badwords.component";
 
-describe('BadwordsComponent', () => {
-  let component: BadwordsComponent;
-  let fixture: ComponentFixture<BadwordsComponent>;
+describe("BadwordsComponent", () => {
+  let component: BadWordsComponent;
+  let fixture: ComponentFixture<BadWordsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BadwordsComponent ]
-    })
-    .compileComponents();
+      declarations: [BadWordsComponent],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(BadwordsComponent);
+    fixture = TestBed.createComponent(BadWordsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

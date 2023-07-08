@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { map } from 'rxjs';
+import { NotifierService } from 'angular-notifier';
 import { Appointment } from 'src/app/core/models/Appointment.model';
 import { AppointmentService } from 'src/app/core/services/appointment.service';
 
@@ -23,7 +25,8 @@ modalContent: any;
 modalRef: NgbModalRef | undefined;
 constructor(
 private appointmentService: AppointmentService,
-public modalService: NgbModal
+public modalService: NgbModal,
+private notifier: NotifierService,
 ) { }
 
 ngOnInit(): void {
@@ -35,21 +38,22 @@ handleDateClick(arg: any) {
 alert('date click! ' + arg.dateStr);
 }
 
-readAppointments () {
-this.appointmentService.getAllAppointments().subscribe((response: Appointment[]) => {
-  
-  let events: any = [] 
-  response.map((app: Appointment) => {
-    let obj = { 
-      title: app.title, 
-      start: app.dateDebut, 
-      end: app.dateFin ,  
-      id: app.idAppointment,
-  }
-    events.push(obj)
-  })
-  this.calendarOptions.events = events
-})  
+readAppointments() {
+  const userId = localStorage.getItem('userId');
+  this.appointmentService.getAllAppointments().subscribe((filteredResponse: Appointment[]) => {
+    let events: any = [];
+    filteredResponse.map((app: Appointment) => {
+      let obj = {
+        title: app.title,
+        start: app.dateDebut,
+        end: app.dateFin,
+        id: app.idAppointment,
+      };
+      
+      events.push(obj);
+    });
+    this.calendarOptions.events = events;
+  });
 }
 
 showEventDetails(event: any ,content: any) {
@@ -95,6 +99,10 @@ if (this.selectedEvent && this.selectedEvent.id) {
       console.log('Appointment updated:', response);
       // Close the modal or perform any other actions
       this.modalService.dismissAll()
+      this.notifier.notify(
+        'success',
+        'Appointment succesfully Added'
+      );
       // Reload appointments
       this.readAppointments();
   
@@ -120,6 +128,11 @@ if (this.selectedEvent && this.selectedEvent.id) {
       console.log('Appointment deleted');
       // Close the modal
       this.modalService.dismissAll()
+      this.notifier.notify(
+        'success',
+        'Appointment succesfully Added'
+      );
+      
       // Reload appointments
       this.readAppointments();
     }, (err => {

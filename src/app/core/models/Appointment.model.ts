@@ -1,4 +1,5 @@
 import { IAppointment } from "../interfaces/AppointmentInterface";
+import { UserEntity } from "./user-entity.model";
 
 export interface Appointment {
     idAppointment: number;
@@ -10,7 +11,7 @@ export interface Appointment {
     online: boolean;
     createdAt: string; // Assuming date format is ISO 8601 string (e.g., "2023-05-28T09:00:00")
     updatedAt: string; // Assuming date format is ISO 8601 string (e.g., "2023-05-28T09:30:00")
-    user: User;
+    user: UserEntity;
     company: Company;
     propertyOffer: PropertyOffer;
   }

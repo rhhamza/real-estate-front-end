@@ -7,6 +7,11 @@ import { Order } from 'src/app/core/models/order.model';
 import { OrderService } from 'src/app/core/services/order-service.service';
 import { IOrder } from '../../../core/interfaces/order';
 import Swal from 'sweetalert2';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { CompanyService } from 'src/app/core/services/company-service.service';
+import { ICompany } from 'src/app/core/interfaces/company';
+import { Company } from 'src/app/core/models/company.model';
 
 
 
@@ -21,14 +26,27 @@ export class OrderAdminComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  orderForm!: FormGroup;
+
   orders: any;
   constructor(
     private orderService: OrderService,
-    private _liveAnnouncer: LiveAnnouncer
+    private _liveAnnouncer: LiveAnnouncer,
+    public modalService: NgbModal,
+    private formBuilder: FormBuilder,
+    private companyService: CompanyService
   ) { }
 
   ngOnInit(): void {
     this.getAllOrders ()
+    this.orderForm = this.formBuilder.group({
+      start_date: [''],
+      end_date: [''],
+      price: [''],
+      status: ['PENDING'],
+      company: ['']
+    })
+    this.getAllCompanies()
   }
 
   ngAfterViewInit() {
@@ -43,6 +61,10 @@ export class OrderAdminComponent implements OnInit {
       this.dataSource.sort = this.sort;
     });
   }
+
+  open(content: any) {
+		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' })
+	}
 
 /*
   getAllOrders(): void {
@@ -87,6 +109,31 @@ export class OrderAdminComponent implements OnInit {
     });
   }
   
+  openModalOrder() {
+
+  }
+
+  onSubmit() {
+    this.orderService.addOrderAndAssignToCompany(this.orderForm.value, this.orderForm.value.company).subscribe((response: any) => {
+      console.log(response);
+      
+    })
+  }
+
+
+  companies: Company[] = []
+
+  getAllCompanies () {
+    
+    this.companyService.getAllCompanies()
+    .subscribe((companies: ICompany[]) => {
+      companies.map((company: ICompany) => new Company(company))      
+      this.companies = companies
+    })
+
+
+    
+  }
 }
 
 

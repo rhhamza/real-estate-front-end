@@ -14,8 +14,8 @@
         <div class="job-profile position-relative">
           <div class="rounded shadow bg-white">
             <div class="text-center py-5 border-bottom">
-              <img src="assets/images/job/Circleci.svg" class="avatar avatar-medium mx-auto rounded-circle d-block"
-                alt="">
+              <img [src]="company?.logo" class="avatar avatar-medium mx-auto rounded-circle d-block" alt="">
+
               <h5 class="mt-3 mb-0">CircleCi</h5>
               <p class="text-muted mb-0">Internet Services</p>
             </div>
@@ -25,11 +25,11 @@
               <ul class="list-unstyled mb-4">
                 <li class="h6">
                   <i-feather name="map-pin" class="fea icon-sm text-warning me-3"></i-feather><span
-                    class="text-muted">Location :</span> {{ company.name }}
+                    class="text-muted">Location :</span> {{ company?.name }}
                 </li>
                 <li class="h6">
                   <i-feather name="link" class="fea icon-sm text-warning me-3"></i-feather><span
-                    class="text-muted">Comapny :</span> {{ company.name }}
+                    class="text-muted">Comapny :</span> {{ company?.name }}
                 </li>
                 <li class="h6">
                   <i-feather name="dollar-sign" class="fea icon-sm text-warning me-3"></i-feather><span
@@ -174,7 +174,7 @@
           <h4>About us :</h4>
           
           
-          <p class="text-muted mb-0">{{ company.description }}</p>
+          <p class="text-muted mb-0">{{ company?.description }}</p>
 
           <h4 class="mt-lg-5 mt-4">Join The Team :</h4>
           <p class="text-muted mb-0">Started in 2011, we have grown to over 200 employees all over the world.
@@ -270,11 +270,11 @@
                 </div>
               </a>
             </div>
-            <!--end col-->
-            <div class="col-12 mt-4 pt-2">
-              <a routerLink="/page-jobs" class="btn btn-primary">See All Jobs <i
-                  class="uil uil-angle-right-b align-middle"></i></a>
+
+            <div class="col-lg-6 my-5" *ngFor="let offer of offers">
+              <app-offer-card [data]="offer"></app-offer-card>
             </div>
+            
           </div>
         </div>
       </div>
@@ -291,7 +291,7 @@
 
 <!-- Back to top -->
 
-<div class="d-grid">
-  <a [routerLink]="['/orders-plan', company.id]" class="btn btn-soft-primary">Companies MGT <i class="uil uil-angle-right-b align-middle"></i></a>
+<div class="container d-grid mb-4">
+  <a [routerLink]="['/orders-plan', company?.id]" class="btn btn-soft-primary">Companies MGT <i class="uil uil-angle-right-b align-middle"></i></a>
 
 </div>

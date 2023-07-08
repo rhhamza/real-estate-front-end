@@ -6,21 +6,21 @@
       <div class="row align-items-center">
         <div class="col-lg-7 col-md-6">
           <div class="me-lg-5">
-            <img src="assets/images/user/signup.svg" class="img-fluid d-block mx-auto" alt="">
+            <img src="assets/images/illustrator/working_with_computer.svg" class="img-fluid d-block mx-auto" alt="">
           </div>
         </div>
         <div class="col-lg-5 col-md-6">
           <div class="card shadow rounded border-0">
             <div class="card-body">
-              <h4 class="card-title text-center">Signup</h4>
+              <h4 class="card-title text-center">Register As A Company</h4>
               <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="login-form mt-4">
                 <!-- First name -->
                 <div class="col-md-12">
                   <div class="mb-3">
-                    <label class="form-label">First name <span class="text-danger">*</span></label>
+                    <label class="form-label">Company Name <span class="text-danger">*</span></label>
                     <div class="form-icon position-relative">
                       <i-feather name="user" class="fea icon-sm icons"></i-feather>
-                      <input type="text" class="form-control ps-5" placeholder="First Name" formControlName="first_name" required>
+                      <input type="text" class="form-control ps-5" placeholder="Company Name" formControlName="first_name" required>
                     </div>
                   </div>
                 </div>
@@ -28,10 +28,10 @@
                 <!-- Last name -->
                 <div class="col-md-12">
                   <div class="mb-3">
-                    <label class="form-label">Last name <span class="text-danger">*</span></label>
+                    <label class="form-label">Company Optional Name <span class="text-danger">*</span></label>
                     <div class="form-icon position-relative">
                       <i-feather name="user-check" class="fea icon-sm icons"></i-feather>
-                      <input type="text" class="form-control ps-5" placeholder="Last Name" formControlName="last_name" required>
+                      <input type="text" class="form-control ps-5" placeholder="Company Optional Name" formControlName="last_name" required>
                     </div>
                   </div>
                 </div>
@@ -39,10 +39,10 @@
                 <!-- Email -->
                 <div class="col-md-12">
                   <div class="mb-3">
-                    <label class="form-label">Your Email <span class="text-danger">*</span></label>
+                    <label class="form-label">Company Email <span class="text-danger">*</span></label>
                     <div class="form-icon position-relative">
                       <i-feather name="mail" class="fea icon-sm icons"></i-feather>
-                      <input type="email" class="form-control ps-5" placeholder="Email" formControlName="email" required>
+                      <input type="email" class="form-control ps-5" placeholder="Company Email" formControlName="email" required>
                     </div>
                   </div>
                 </div>
@@ -78,7 +78,7 @@
 
                 <div class="col-md-12">
                   <div class="d-grid">
-                    <button type="button" class="btn btn-primary" [routerLink]="['/auth', 'register-company']">Register as a Company</button>
+                    <button type="button" class="btn btn-primary" [routerLink]="['/auth', 'register']">Register as a Client</button>
                   </div>
                 </div>
                 

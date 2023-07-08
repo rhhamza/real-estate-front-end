@@ -13,7 +13,13 @@
                 </div>
                 <div class="form-group col-6">
                     <label>Location</label>
-                    <input type="text" class="form-control" placeholder="location" formControlName="location" [ngClass]="{ 'is-invalid': submitted && f.location.errors }">
+                    <input class="form-control"
+                    ngx-google-places-autocomplete
+                    formControlName="location" 
+                    [options]="options"
+                    (onAddressChange)="handleAddressChange($event)"
+                    [ngClass]="{ 'is-invalid': submitted && f.location.errors }"
+                />
                     <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
                         <div *ngIf="f.location.errors.required">Location is required</div>
                     </div>
@@ -76,6 +82,21 @@
                     <div *ngIf="submitted && f.sqm.errors" class="invalid-feedback">
                         <div *ngIf="f.sqm.errors.required">Sqm is required</div>
                     </div>
+                </div>
+                <div class="form-group col-12">
+                    <label>Picture</label>
+                    <input type="file" (change)="fileChangeEvent($event)" class="form-control" />
+
+                    <image-cropper
+                        [imageChangedEvent]="imageChangedEvent"
+                        [maintainAspectRatio]="true"
+                        [aspectRatio]="4 / 3"
+                        format="png"
+                        (imageCropped)="imageCropped($event)"
+
+                    ></image-cropper>
+
+                    <img [src]="croppedImage" />
                 </div> 
             </div>
             

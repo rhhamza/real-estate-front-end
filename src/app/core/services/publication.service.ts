@@ -21,6 +21,9 @@ export class PublicationService {
     return this.http.get<Publication[]>(`${this.baseUrl}`);
   }
 
+  getAllFullPublications(): Observable<Publication[]> {
+    return this.http.get<Publication[]>(`${this.baseUrl}/fullpublications`);
+  }
   createPublication(
     publication: Publication,
     userId: string
@@ -33,7 +36,7 @@ export class PublicationService {
 
   updatePublication(
     id: number,
-    publication: Publication
+    publication: any
   ): Observable<Publication> {
     return this.http.put<Publication>(`${this.baseUrl}/${id}`, publication);
   }
