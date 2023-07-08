@@ -122,6 +122,7 @@ export class BlogsComponent implements OnInit {
     const publication = {
       title: this.publicationForm.value.title,
       content: this.publicationForm.value.content,
+      user: this.userId,
     };
 
     this.publicationService

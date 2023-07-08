@@ -34,10 +34,7 @@ export class PublicationService {
     );
   }
 
-  updatePublication(
-    id: number,
-    publication: Publication
-  ): Observable<Publication> {
+  updatePublication(id: number, publication: any): Observable<Publication> {
     return this.http.put<Publication>(`${this.baseUrl}/${id}`, publication);
   }
 

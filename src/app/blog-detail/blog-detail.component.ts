@@ -279,4 +279,17 @@ export class BlogDetailComponent implements OnInit {
   resetCommentContent(): void {
     this.commentContent = "";
   }
+
+  deleteComment(commentId: number, publicationId: number) {
+    this.commentService.deleteComment(commentId).subscribe(
+      (response) => {
+        this.modalService.dismissAll();
+        this.getCommentList(publicationId);
+      },
+      (err) => {
+        this.modalService.dismissAll();
+        this.getCommentList(publicationId);
+      }
+    );
+  }
 }
