@@ -29,13 +29,15 @@ export class AppointmentFormComponent implements OnInit {
       dateDebut: ['', Validators.required],
       dateFin: ['', Validators.required,this.dateFinValidator()],
       meetingLink: [''],
-      online: [false, Validators.required],
+      online: [this.isOnline, Validators.required],
       location: [{ value: '', disabled:false }]
     });
   }
 
 
- ngOnInit(): void {/* 
+ ngOnInit(): void {
+  console.log(this.isOnline)
+  /* 
 
     this.AppoitmentForm.get('online')?.valueChanges.subscribe((value) => {
       const locationControl = this.AppoitmentForm.get('location');
@@ -54,6 +56,7 @@ export class AppointmentFormComponent implements OnInit {
   onSubmit() {
       this.submitted = true;
       console.log(this.AppoitmentForm.value);
+      console.log(this.isOnline);
       
       if (this.AppoitmentForm?.invalid) {
           return;
@@ -61,6 +64,8 @@ export class AppointmentFormComponent implements OnInit {
 
       let body = {
         ...this.AppoitmentForm.value,
+        online:this.isOnline,
+      
         propertyOffer: { id: this.offerId ? parseInt(this.offerId) : 0 },
         user:{id: this.userId},
       }
@@ -74,6 +79,10 @@ export class AppointmentFormComponent implements OnInit {
         console.log(this.offerId)
         
         console.log(this.AppoitmentForm.value);
+        this.notifier.notify(
+          'success',
+          'Offer succesfully Added'
+        );
       }, err => {
         this.notifier.notify(
           'error',
@@ -98,12 +107,15 @@ export class AppointmentFormComponent implements OnInit {
       return null;
     };
   }
+
   toggleOnline() {
     this.isOnline = !this.isOnline;
+  console.log(this.isOnline)
     if (!this.isOnline) {
       this.AppoitmentForm.get('location')?.setValue('');
     }
   }
+
 
 
 }

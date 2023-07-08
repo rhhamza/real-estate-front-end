@@ -5,6 +5,7 @@ import { AppointmentService } from '../core/services/appointment.service';
 import { Appointment } from '../core/models/Appointment.model';
 import { ModalDismissReasons, NgbModal , NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import { map } from 'rxjs';
+import { NotifierService } from 'angular-notifier';
 
 
 
@@ -27,7 +28,8 @@ export class CalendarComponent implements OnInit {
   modalRef: NgbModalRef | undefined;
   constructor(
     private appointmentService: AppointmentService,
-    public modalService: NgbModal
+    public modalService: NgbModal,
+    private notifier: NotifierService,
   ) { }
 
   ngOnInit(): void {
@@ -100,8 +102,13 @@ export class CalendarComponent implements OnInit {
           console.log('Appointment updated:', response);
           // Close the modal or perform any other actions
           this.modalService.dismissAll()
+          this.notifier.notify(
+            'success',
+            'Offer succesfully Added'
+          );
           // Reload appointments
           this.readAppointments();
+
       
         },
         (error: any) => {
