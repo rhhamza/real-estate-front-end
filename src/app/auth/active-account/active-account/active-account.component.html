@@ -1,5 +1,4 @@
 <div class="user-container">
     <img src="assets/images/account/20944201.jpg" alt="User Image" class="user-image">
-    <button (click)="activateUser()" class="activate-button">Activate Account</button>
+    <button (click)="activateUser()" [routerLink]="['/auth', 'login']" class="activate-button">Activate Account</button>
   </div>
-  

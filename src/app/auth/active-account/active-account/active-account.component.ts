@@ -26,7 +26,7 @@ export class ActiveAccountComponent implements OnInit {
   activateUser() {
     if (this.userId !== undefined) {
       this.userService.activeUser(this.userId).subscribe(() => {
-        this.router.navigate(['']);
+        this.router.navigate(['/login']);
       });
     }
   }
