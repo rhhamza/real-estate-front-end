@@ -4,4 +4,29 @@
     background-color: #eaeaea;
     display: none; /* Hide the component by default */
   }
+  .user-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .user-image {
+    width: 30%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  .activate-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  .activate-button:hover {
+    background-color: #0069d9;
+  }
   

@@ -9,6 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActiveAccountComponent } from './active-account/active-account/active-account.component';
 import { CompanyRegisterComponent } from './company-register/company-register.component';
+import { RegisterCompanyComponent } from './register-company/register-company.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { CompanyRegisterComponent } from './company-register/company-register.co
     RegisterComponent,
     ResetPasswordComponent,
     ActiveAccountComponent,
+    RegisterCompanyComponent,
     
   ],
   imports: [
