@@ -104,7 +104,7 @@ export class CalendarComponent implements OnInit {
           this.modalService.dismissAll()
           this.notifier.notify(
             'success',
-            'Offer succesfully Added'
+            'Appointment succesfully Added'
           );
           // Reload appointments
           this.readAppointments();
@@ -117,7 +117,10 @@ export class CalendarComponent implements OnInit {
           console.log('Appointment updated:');
           console.error('Update error:', error);
           this.modalService.dismissAll()
-          this.readAppointments();
+          this.notifier.notify(
+            'error',
+            error.error.message
+          );
         }
       );
     }
@@ -132,12 +135,21 @@ export class CalendarComponent implements OnInit {
           console.log('Appointment deleted');
           // Close the modal
           this.modalService.dismissAll()
+          this.notifier.notify(
+            'success',
+            'Appointment succesfully deleted'
+          );
           // Reload appointments
           this.readAppointments();
         }, (err => {
           console.log(err)
          
           this.modalService.dismissAll()
+          this.notifier.notify(
+            'error',
+            err.error.message
+          );
+          
           this.readAppointments();
           
         })
