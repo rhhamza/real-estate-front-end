@@ -8,7 +8,7 @@ import { ICompany } from "../interfaces/company";
   providedIn: "root",
 })
 export class CompanyService {
-  private apiUrl = "http://localhost:8089/Realstate/company"; // Adjust the API URL as per your backend endpoint
+  private apiUrl = "http://localhost:8091/Realstate/company"; // Adjust the API URL as per your backend endpoint
  
   constructor(private http: HttpClient) {}
 
@@ -25,13 +25,23 @@ export class CompanyService {
     return this.http.post<Company>(`${this.apiUrl}/add`, company);
   }
 
-  updateCompany(id: number, company: Company): Observable<Company> {
+  updateCompany(id: string, company: Company): Observable<Company> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.put<Company>(url, company);
   }
 
-  deleteCompany(id: number): Observable<any> {
+  deleteCompany(id: string): Observable<any> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.delete(url);
   }
+
+  acceptCompany(id: string): Observable<Company> {
+    return this.http.put<Company>(`${this.apiUrl}/accept/${id}`, null);
+  }
+
+  rejectCompany(id: string): Observable<Company> {
+    return this.http.put<Company>(`${this.apiUrl}/reject/${id}`, null);
+  }
+
+
 }
