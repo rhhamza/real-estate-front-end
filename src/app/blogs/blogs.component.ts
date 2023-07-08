@@ -6,6 +6,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { NotifierService } from "angular-notifier";
 import { UserService } from "../core/services/user.service";
 import { Publication } from "../core/models/publication.model";
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
   selector: "app-blogs",
@@ -22,7 +23,8 @@ export class BlogsComponent implements OnInit {
     private formBuilder: FormBuilder,
     public modalService: NgbModal,
     private notifier: NotifierService,
-    public userService: UserService
+    public userService: UserService,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -85,6 +87,7 @@ export class BlogsComponent implements OnInit {
     const publication = {
       title: this.publicationForm.value.title,
       content: this.publicationForm.value.content,
+      picture: this.base64
     };
 
     if (this.userId) {
@@ -161,4 +164,63 @@ export class BlogsComponent implements OnInit {
       content: this.data.content,
     });
   }
+
+  base64!: string;
+  imageChangedEvent: any = '';
+    croppedImage: any = '';
+
+
+    fileChangeEvent(event: any): void {
+        this.imageChangedEvent = event;
+    }
+
+    imageCropped(event: any) {
+      const blob = event.blob;
+      this.convertToBase64(blob);
+      this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(event.base64);
+    }
+    
+    convertToBase64(file: File) {
+      const reader = new FileReader();
+      reader.onload = (event: ProgressEvent<FileReader>) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+    
+          // Set the desired image dimensions
+          const maxWidth = 800;
+          const maxHeight = 800;
+          let width = img.width;
+          let height = img.height;
+    
+          // Calculate new dimensions to maintain aspect ratio
+          if (width > maxWidth) {
+            height *= maxWidth / width;
+            width = maxWidth;
+          }
+          if (height > maxHeight) {
+            width *= maxHeight / height;
+            height = maxHeight;
+          }
+    
+          // Set the canvas dimensions
+          canvas.width = width;
+          canvas.height = height;
+    
+          // Draw the image on the canvas
+          if (ctx)
+          ctx.drawImage(img, 0, 0, width, height);
+    
+          // Get the compressed base64 string
+          const base64String = canvas.toDataURL(file.type);
+    
+          // Use the base64 string as needed (e.g., send it to the server)
+          this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(base64String);
+          this.base64 = base64String;
+        };
+        img.src = event.target!.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
 }

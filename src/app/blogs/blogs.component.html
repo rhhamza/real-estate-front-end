@@ -75,7 +75,7 @@
           <div class="row align-items-center g-0">
             <div class="col-md-6">
               <img
-                src="https://www.khov.com/blog/wp-content/uploads/2019/08/Ranch-Style-Home-at-K.-Hovnanians-Four-Seasons-at-Belle-Terre-1600x1024.jpg"
+                [src]="data.picture ? data.picture : 'https://www.khov.com/blog/wp-content/uploads/2019/08/Ranch-Style-Home-at-K.-Hovnanians-Four-Seasons-at-Belle-Terre-1600x1024.jpg'"
                 class="img-fluid"
                 alt=""
               />
@@ -241,6 +241,21 @@
           required
         ></textarea>
       </div>
+      <div class="form-group col-12">
+        <label>Picture</label>
+        <input type="file" (change)="fileChangeEvent($event)" class="form-control" />
+
+        <image-cropper
+            [imageChangedEvent]="imageChangedEvent"
+            [maintainAspectRatio]="true"
+            [aspectRatio]="4 / 3"
+            format="png"
+            (imageCropped)="imageCropped($event)"
+
+        ></image-cropper>
+
+        <img [src]="croppedImage" />
+    </div> 
       <!-- Add more fields if needed -->
     </form>
   </div>

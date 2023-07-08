@@ -10,7 +10,7 @@ import {IOrder} from '../interfaces/order';
   providedIn: 'root'
 })
 export class OrderService {
-  private apiUrl = "http://localhost:8091/Realstate/order"; // Adjust the API URL as per your backend endpoint
+  private apiUrl = "http://localhost:8089/Realstate/order"; // Adjust the API URL as per your backend endpoint
 
 
   constructor(private http: HttpClient) { }
