@@ -1,6 +1,6 @@
 <div class="card blog rounded border-0 shadow overflow-hidden">
     <div class="position-relative">
-        <img src="/assets/images/1.jpg" class="card-img-top" alt="...">
+        <img [src]="data.picture" class="card-img-top w-100" alt="...">
         <div class="overlay rounded-top bg-dark"></div>
     </div>
     <div class="card-body content">
@@ -8,9 +8,8 @@
         <div class="post-meta d-flex justify-content-between mt-3">
             <ul class="list-unstyled mb-0">
                 <li class="list-inline-item me-2 mb-0"><a href="javascript:void(0)"
-                        class="text-muted like"><i class="uil uil-heart me-1"></i>{{data.like}}</a></li>
-                <li class="list-inline-item"><a href="javascript:void(0)" class="text-muted comments"><i
-                            class="uil uil-comment me-1"></i>{{data.message}}</a></li>
+                        class="text-muted like">{{data.price }} Tnd</a></li>
+       
             </ul>
             <a [routerLink]="['/offers', data.id]" class="text-muted readmore">
                 Read More
@@ -19,7 +18,7 @@
         </div>
     </div>
     <div class="author">
-        <small class="text-light user d-block"><i class="uil uil-user"></i> {{data.name}}</small>
+        <small class="text-light user d-block"><i class="uil uil-user"></i> Hamza Rahali</small>
         <small class="text-light date"><i class="uil uil-calendar-alt"></i> {{data.createdAt  | date: 'medium'}}</small>
     </div>
 </div>

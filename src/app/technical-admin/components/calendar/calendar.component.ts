@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { map } from 'rxjs';
 import { Appointment } from 'src/app/core/models/Appointment.model';
 import { AppointmentService } from 'src/app/core/services/appointment.service';
 
@@ -35,21 +36,27 @@ handleDateClick(arg: any) {
 alert('date click! ' + arg.dateStr);
 }
 
-readAppointments () {
-this.appointmentService.getAllAppointments().subscribe((response: Appointment[]) => {
-  
-  let events: any = [] 
-  response.map((app: Appointment) => {
-    let obj = { 
-      title: app.title, 
-      start: app.dateDebut, 
-      end: app.dateFin ,  
-      id: app.idAppointment,
-  }
-    events.push(obj)
-  })
-  this.calendarOptions.events = events
-})  
+readAppointments() {
+  const userId = localStorage.getItem('userId');
+  this.appointmentService.getAllAppointments().pipe(
+    map((response: Appointment[]) => {
+      // Apply filter based on userId
+      return response.filter((app: any) => app.user.id+"" === userId);
+    })
+  ).subscribe((filteredResponse: Appointment[]) => {
+    let events: any = [];
+    filteredResponse.map((app: Appointment) => {
+      let obj = {
+        title: app.title,
+        start: app.dateDebut,
+        end: app.dateFin,
+        id: app.idAppointment,
+      };
+      
+      events.push(obj);
+    });
+    this.calendarOptions.events = events;
+  });
 }
 
 showEventDetails(event: any ,content: any) {

@@ -15,8 +15,8 @@ export class OfferService {
     private httpClient: HttpClient
   ) { }
 
-  createOffer(body: {}): Observable<IOffer> {
-    return this.httpClient.post(this.backEndApi + 'add', body) as Observable<IOffer>;
+  createOffer(body: {}, userid: string): Observable<IOffer> {
+    return this.httpClient.post(this.backEndApi + 'add/' + userid, body) as Observable<IOffer>;
   }
 
   updateOffer(offerId: string, body: {}): Observable<IOffer> {

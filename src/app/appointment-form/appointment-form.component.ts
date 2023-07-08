@@ -23,7 +23,7 @@ export class AppointmentFormComponent implements OnInit {
       dateDebut: ['', Validators.required],
       dateFin: ['', Validators.required,this.dateFinValidator()],
       meetingLink: [''],
-      online: [false, Validators.required],
+      online: [true, Validators.required],
       location: [{ value: '', disabled:false }]
     });
   }
@@ -74,6 +74,7 @@ export class AppointmentFormComponent implements OnInit {
         );
       });
     }
+    
   dateFinValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const dateDebut = this.AppoitmentForm.get('dateDebut')?.value;

@@ -21,6 +21,7 @@ import {MatTableModule} from '@angular/material/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotifierModule } from 'angular-notifier';
 import { NotifierOptions } from 'angular-notifier';
+import { ImageCropperModule } from 'ngx-image-cropper';
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
   slidesPerView: 'auto'
@@ -106,7 +107,8 @@ const customNotifierOptions: NotifierOptions = {
     MatPaginatorModule,
     FormsModule,
     ReactiveFormsModule,
-    NotifierModule
+    NotifierModule,
+    ImageCropperModule
   ],
   providers: [
     {

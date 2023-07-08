@@ -9,6 +9,7 @@ export class Offer {
     category: string;
     price: string;
     sqm: string;
+    picture: string;
     location: string
     bedrooms: number;
     bathrooms: number
@@ -23,6 +24,7 @@ export class Offer {
         this.reference = data.reference;
         this.type = data.type;
         this.category = data.category
+        this.picture = data.picture
         this.price = data.price;
         this.sqm = data.sqm;
         this.location = data.location;

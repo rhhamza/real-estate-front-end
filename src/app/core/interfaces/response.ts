@@ -5,6 +5,7 @@ export interface IOffer {
     type: string;
     category: string;
     price: string;
+    picture: string;
     sqm: string;
     description: string;
     location: string
