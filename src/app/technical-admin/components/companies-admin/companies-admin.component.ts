@@ -6,13 +6,14 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ICompany } from 'src/app/core/interfaces/company';
 import { CompanyService } from '../../../core/services/company-service.service';
 import { Company } from '../../../core/models/company.model';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-companies-admin',
   templateUrl: './companies-admin.component.html',
   styleUrls: ['./companies-admin.component.scss']
 })
 export class CompaniesAdminComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'email', 'phone', 'address', 'createdAt', 'updatedAt'];
+  displayedColumns: string[] = ['id', 'name', 'email', 'phone', 'address','status', 'createdAt', 'updatedAt', 'actions','update-status'];
   dataSource = new MatTableDataSource<Company>
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -39,7 +40,11 @@ export class CompaniesAdminComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     })
+
+
+    
   }
+
 
 
 
@@ -51,10 +56,68 @@ export class CompaniesAdminComponent implements OnInit {
     }
   }
 
-  deleteCompany(company: number) {    
-    this.companyService.deleteCompany(company).subscribe((response) => {
+  deleteCompany(companyid: string) {  
+    Swal.fire({
+      title: 'Are you sure you want to delete this Company?',
+      text: '',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {  
+    this.companyService.deleteCompany(companyid).subscribe((response) => {
       console.log(response);
+      window.location.reload();
       
     })
   }
+
+    });
+  }
+
+
+  acceptCompany(companyid: string) {  
+    Swal.fire({
+      title: 'Are you sure you want to accept this Company?',
+      text: '',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Accept it!',
+    }).then((result) => {
+      if (result.isConfirmed) {  
+    this.companyService.acceptCompany(companyid).subscribe((response) => {
+      console.log(response);
+      window.location.reload();
+      
+    })
+  }
+
+    });
+  }
+  rejectCompany(companyid: string) {  
+    Swal.fire({
+      title: 'Are you sure you want to reject this Company?',
+      text: '',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Reject it!',
+    }).then((result) => {
+      if (result.isConfirmed) {  
+    this.companyService.rejectCompany(companyid).subscribe((response) => {
+      console.log(response);
+      window.location.reload();
+      
+    })
+  }
+
+    });
+  }
+
+
 }

@@ -11,6 +11,8 @@ import { SharedModule } from '../shared/shared.module';
 import { OffersComponent } from './components/offers/offers.component';
 import { CreateOfferComponent } from './components/create-offer/create-offer.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { CreateCompanyComponent } from './components/create-company/create-company.component';
+import { UpdateCompanyComponent } from './components/update-company/update-company.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { CalendarComponent } from './components/calendar/calendar.component';
     OrderAdminComponent,
     BadWordsComponent,
     CreateBadWordComponent,
-    CalendarComponent
+    CalendarComponent,
+    CreateCompanyComponent,
+    UpdateCompanyComponent,
   ],
   imports: [CommonModule, TechnicalAdminRoutingModule, SharedModule],
 })

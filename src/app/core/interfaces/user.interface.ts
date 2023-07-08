@@ -8,5 +8,6 @@ export interface IUserEntity{
   status: string;
   email?: string;
   password?: string;
+  roles?: string;
 
 }

@@ -31,7 +31,7 @@ export class CompaniesMgtComponent implements OnInit {
   }
   
 
-  companyDelete(id:number) {
+  companyDelete(id:string) {
 
     this.companyService.deleteCompany(id).subscribe((response: any) => {
       this.companies = [];

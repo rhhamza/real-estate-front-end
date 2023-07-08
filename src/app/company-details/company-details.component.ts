@@ -51,6 +51,6 @@ export class CompanyDetailsComponent implements OnInit {
     );
   }
 
-
+  
 
 }
