@@ -20,6 +20,7 @@ export class CalendarComponent implements OnInit {
         initialView: 'dayGridMonth',
         events: [],
       };
+  userId = localStorage.getItem('userId') || null
   appointments: Appointment[] = []
   selectedEvent: any; 
   modalContent: any;
@@ -39,13 +40,8 @@ export class CalendarComponent implements OnInit {
   }
   
   readAppointments() {
-    const userId = localStorage.getItem('userId');
-    this.appointmentService.getAllAppointments().pipe(
-      map((response: Appointment[]) => {
-        // Apply filter based on userId
-        return response.filter(app => app.user.ID+"" === userId);
-      })
-    ).subscribe((filteredResponse: Appointment[]) => {
+    this.appointmentService.getAllAppointments()
+    .subscribe((filteredResponse: Appointment[]) => {
       let events: any = [];
       filteredResponse.map((app: Appointment) => {
         let obj = {

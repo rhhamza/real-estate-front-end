@@ -15,13 +15,13 @@ export class AppointmentFormComponent implements OnInit {
   isOnline = false;
   submitted = false;
   offerId= this.activateRoute.snapshot.paramMap.get('offer');
-  
+  userId = localStorage.getItem('userId') || null
 
   constructor(private fb: FormBuilder, 
      private appointmentService: AppointmentService, 
     private activateRoute: ActivatedRoute, 
     private notifier: NotifierService,
- 
+    
     ) {
     this.AppoitmentForm = this.fb.group({
       title: ['', Validators.required],
@@ -30,6 +30,7 @@ export class AppointmentFormComponent implements OnInit {
       dateFin: ['', Validators.required,this.dateFinValidator()],
       meetingLink: [''],
       online: [false, Validators.required],
+      location: [{ value: '', disabled:false }]
     });
   }
 
@@ -61,7 +62,7 @@ export class AppointmentFormComponent implements OnInit {
       let body = {
         ...this.AppoitmentForm.value,
         propertyOffer: { id: this.offerId ? parseInt(this.offerId) : 0 },
-        user:  Number(localStorage.getItem('userId')),
+        user:{id: this.userId},
       }
 
       this.appointmentService.createAppointment(body).subscribe((response: IAppointment) => {
@@ -71,7 +72,7 @@ export class AppointmentFormComponent implements OnInit {
           // Do something after the form submission
         }, 2000);
         console.log(this.offerId)
-      
+        
         console.log(this.AppoitmentForm.value);
       }, err => {
         this.notifier.notify(

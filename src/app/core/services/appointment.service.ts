@@ -18,7 +18,8 @@ export class AppointmentService {
   constructor(private http: HttpClient) { }
 
   getAllAppointments(): Observable<Appointment[]> {
-    return this.http.get(`${this.apiUrl}/all`) as Observable<Appointment[]>;
+    const userId = localStorage.getItem('userId');
+    return this.http.get(`${this.apiUrl}/listby/${userId}`) as Observable<Appointment[]>;
   }
 
   getAppointment(idAppointment: number): Observable<Appointment> {
