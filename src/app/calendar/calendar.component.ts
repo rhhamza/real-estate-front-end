@@ -4,6 +4,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import { AppointmentService } from '../core/services/appointment.service';
 import { Appointment } from '../core/models/Appointment.model';
 import { ModalDismissReasons, NgbModal , NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import { map } from 'rxjs';
+import { NotifierService } from 'angular-notifier';
 
 
 
@@ -19,13 +21,15 @@ export class CalendarComponent implements OnInit {
         initialView: 'dayGridMonth',
         events: [],
       };
+  userId = localStorage.getItem('userId') || null
   appointments: Appointment[] = []
   selectedEvent: any; 
   modalContent: any;
   modalRef: NgbModalRef | undefined;
   constructor(
     private appointmentService: AppointmentService,
-    public modalService: NgbModal
+    public modalService: NgbModal,
+    private notifier: NotifierService,
   ) { }
 
   ngOnInit(): void {
@@ -37,22 +41,23 @@ export class CalendarComponent implements OnInit {
     alert('date click! ' + arg.dateStr);
   }
   
-  readAppointments () {
-    this.appointmentService.getAllAppointments().subscribe((response: Appointment[]) => {
-      
-      let events: any = [] 
-      response.map((app: Appointment) => {
-        let obj = { 
-          title: app.title, 
-          start: app.dateDebut, 
-          end: app.dateFin ,  
+  readAppointments() {
+    this.appointmentService.getAllAppointments()
+    .subscribe((filteredResponse: Appointment[]) => {
+      let events: any = [];
+      filteredResponse.map((app: Appointment) => {
+        let obj = {
+          title: app.title,
+          start: app.dateDebut,
+          end: app.dateFin,
           id: app.idAppointment,
-      }
-        events.push(obj)
-      })
-      this.calendarOptions.events = events
-    })  
+        };
+        events.push(obj);
+      });
+      this.calendarOptions.events = events;
+    });
   }
+  
 
   showEventDetails(event: any ,content: any) {
     const appointmentId = event.event.id;
@@ -97,8 +102,13 @@ export class CalendarComponent implements OnInit {
           console.log('Appointment updated:', response);
           // Close the modal or perform any other actions
           this.modalService.dismissAll()
+          this.notifier.notify(
+            'success',
+            'Offer succesfully Added'
+          );
           // Reload appointments
           this.readAppointments();
+
       
         },
         (error: any) => {

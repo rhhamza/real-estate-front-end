@@ -14,6 +14,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { CreateCompanyComponent } from './components/create-company/create-company.component';
 import { UpdateCompanyComponent } from './components/update-company/update-company.component';
 
+
 @NgModule({
   declarations: [
     TechnicalAdminComponent,
