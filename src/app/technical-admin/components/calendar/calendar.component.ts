@@ -40,12 +40,7 @@ alert('date click! ' + arg.dateStr);
 
 readAppointments() {
   const userId = localStorage.getItem('userId');
-  this.appointmentService.getAllAppointments().pipe(
-    map((response: Appointment[]) => {
-      // Apply filter based on userId
-      return response.filter((app: any) => app.user.id+"" === userId);
-    })
-  ).subscribe((filteredResponse: Appointment[]) => {
+  this.appointmentService.getAllAppointments().subscribe((filteredResponse: Appointment[]) => {
     let events: any = [];
     filteredResponse.map((app: Appointment) => {
       let obj = {
