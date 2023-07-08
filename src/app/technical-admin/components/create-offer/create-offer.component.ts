@@ -53,7 +53,7 @@ export class CreateOfferComponent implements OnInit {
   options: any = {
     componentRestrictions: { country: 'TN' }
   }  
-  address?: Address
+  address!: Address
 
   handleAddressChange(address: Address) {
     this.address = address
@@ -72,15 +72,15 @@ export class CreateOfferComponent implements OnInit {
           return;
       }      
       
-      let body = {
-        ...this.offerForm.value,
-        picture: this.base64,
-        reference: this.generateRandomText(8),
-        location: this.address?.formatted_address,
-        user: {
-          id: 1
+        let body = {
+          ...this.offerForm.value,
+          picture: this.base64,
+          reference: this.generateRandomText(8),
+          location: this.address?.formatted_address + ' - lat : ' + this.address.geometry.location.lat() + ' - lng : ' + this.address.geometry.location.lng() ,
+          user: {
+            id: 1
+          }
         }
-      }
       
 
       let userid = localStorage.getItem('userId')
@@ -94,7 +94,6 @@ export class CreateOfferComponent implements OnInit {
             'success',
             'Offer succesfully Added'
           );
-          
         })
       } else {      
 
@@ -123,15 +122,23 @@ export class CreateOfferComponent implements OnInit {
 
   readOfferById(id: string) {
     this.offerService.readOfferById(id).subscribe((response: IOffer) => {
-      this.offer = new Offer(response)      
-      this.croppedImage = this.offer.picture      
+      this.offer = new Offer(response)
+      const locationString = this.offer.location
+
+    // Split the string by the delimiter "-"
+    const parts = locationString.split('-');
+
+    // Extract the first part and trim any extra whitespace
+    const cityAndCountry = parts[0].trim();
+     
+      this.croppedImage = this.offer.picture 
       this.offerForm.patchValue({
         title: this.offer.title,
         category: this.offer.category,
         type: this.offer.type,
         price: this.offer.price,
         sqm: this.offer.sqm,
-        location: this.offer.location,
+        location: cityAndCountry,
         bedrooms: this.offer.bedrooms,
         bathrooms: this.offer.bathrooms,
         description: this.offer.description

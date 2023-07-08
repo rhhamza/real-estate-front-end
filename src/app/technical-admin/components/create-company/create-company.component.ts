@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotifierService } from 'angular-notifier';
@@ -29,7 +30,8 @@ export class CreateCompanyComponent implements OnInit {
     private companyService: CompanyService,
     private notifier: NotifierService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {
@@ -38,8 +40,8 @@ export class CreateCompanyComponent implements OnInit {
       name: ['', Validators.required],
       phone: ['', Validators.required],
       address: ['', Validators.required],
-      email: ['', Validators.required]
-      
+      email: ['', Validators.required],
+      logo: ['']
     })
 
     if (companyId) {
@@ -61,6 +63,7 @@ export class CreateCompanyComponent implements OnInit {
 
       let body = {
         ...this.companyForm.value,
+        logo: this.base64,
         reference: this.generateRandomText(8)    
       }
 
@@ -73,20 +76,15 @@ export class CreateCompanyComponent implements OnInit {
             'success',
             'company succesfully Added'
           );
-          setTimeout(() => {
-            this.router.navigate(['admin', 'offers']);
-          }, 3000);
           
         })
       } else {
-        this.companyService.updateCompany(this.company.id, this.companyForm.value).subscribe((response: ICompany) => {
+        this.companyService.updateCompany(this.company.id, body).subscribe((response: ICompany) => {
           this.notifier.notify(
             'success',
             'Offer succesfully Updated'
           );
-          setTimeout(() => {
-            this.router.navigate(['admin', 'offers']);
-          }, 3000);
+       
         })
       }
    
@@ -108,6 +106,7 @@ export class CreateCompanyComponent implements OnInit {
   readCompanyById(id: string) {
     this.companyService.getCompanyById(id).subscribe((response: ICompany) => {
       this.company = new Company(response)
+      this.croppedImage = this.company.logo
       this.companyForm.patchValue({
         name: this.company.name,
         phone: this.company.phone,
@@ -118,6 +117,64 @@ export class CreateCompanyComponent implements OnInit {
     })
   }
 
+  imageChangedEvent: any = '';
+    croppedImage: any = '';
+    base64! :string;
+
+
+    fileChangeEvent(event: any): void {
+        this.imageChangedEvent = event;
+    }
+
+    imageCropped(event: any) {
+      const blob = event.blob;
+      this.convertToBase64(blob);
+      this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(event.base64);
+    }
+    
+    convertToBase64(file: File) {
+      const reader = new FileReader();
+      reader.onload = (event: ProgressEvent<FileReader>) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+    
+          // Set the desired image dimensions
+          const maxWidth = 800;
+          const maxHeight = 800;
+          let width = img.width;
+          let height = img.height;
+    
+          // Calculate new dimensions to maintain aspect ratio
+          if (width > maxWidth) {
+            height *= maxWidth / width;
+            width = maxWidth;
+          }
+          if (height > maxHeight) {
+            width *= maxHeight / height;
+            height = maxHeight;
+          }
+    
+          // Set the canvas dimensions
+          canvas.width = width;
+          canvas.height = height;
+    
+          // Draw the image on the canvas
+          if (ctx)
+          ctx.drawImage(img, 0, 0, width, height);
+    
+          // Get the compressed base64 string
+          const base64String = canvas.toDataURL(file.type);
+    
+          // Use the base64 string as needed (e.g., send it to the server)
+          this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(base64String);
+          this.base64 = base64String;
+        };
+        img.src = event.target!.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
 }
 
 

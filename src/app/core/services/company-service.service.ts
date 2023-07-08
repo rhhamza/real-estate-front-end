@@ -8,7 +8,7 @@ import { ICompany } from "../interfaces/company";
   providedIn: "root",
 })
 export class CompanyService {
-  private apiUrl = "http://localhost:8091/Realstate/company"; // Adjust the API URL as per your backend endpoint
+  private apiUrl = "http://localhost:8089/Realstate/company"; // Adjust the API URL as per your backend endpoint
  
   constructor(private http: HttpClient) {}
 
