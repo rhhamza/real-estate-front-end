@@ -32,4 +32,8 @@ export class MessageService {
   sendMessageThroughWebSocket(message: Message): void {
     this.websocketService.sendMessage(message);
   }
+
+  getAllmessags():Observable<any>{
+    return this.http.get<Message[]>(`${this.baseUrl}/all`);
+  }
 }

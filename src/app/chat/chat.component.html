@@ -4,43 +4,52 @@
       <div class="discussion search">
         <div class="searchbar">
           <i class="fa fa-search" aria-hidden="true"></i>
-          <input type="text" placeholder="Search...">
+          <input type="text" placeholder="Search..." [(ngModel)]="searchQuery" (keyup.enter)="searchUsers()">
         </div>
       </div>
-
-      <div class="discussion" *ngFor="let chat of chatList" (click)="goToChat(chat.firstname)">
-        <div class="photo" [style.background-image]="'url(' + chat.photoUrl + ')'">
+      
+      <div *ngIf="searchResults">
+        <h2>Search Results</h2>
+        <ul>
+          <li *ngFor="let user of searchResults">
+            {{ user.firstname }} {{ user.lastname }}
+            <button (click)="createConversation(user)">Create Conversation</button>
+          </li>
+        </ul>
+      </div>
+      <div class="discussion message-active" *ngFor="let chat of chatList" (click)="selectConversation(chat)">
+        <div class="photo" style="background-image: url(https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);">
           <div class="online"></div>
         </div>
         <div class="desc-contact">
-          <p class="name">{{ chat.firstname }} {{ chat.lastname }}</p>
-          <p class="message">{{ chat.message }}</p>
+          <p class="name">{{ chat.participants?.[0]?.firstname }} {{ chat.participants?.[0]?.lastname }}</p>
+          <p class="message">{{ chat.messages?.[0]?.content }}</p>
         </div>
-        <div class="timer">{{ chat.lastActive }}</div>
+        <div class="timer">{{chat.messages?.[0]?.timestamp}}</div>
       </div>
     </section>
-
-    <section class="chat" *ngIf="chatData">
+    <section class="chat" *ngIf="selectedConversation">
       <div class="header-chat">
         <i class="icon fa fa-user-o" aria-hidden="true"></i>
-        <p class="name">{{ firstname }} {{ lastname }}</p>
+        <p class="name">{{ selectedConversation.participants?.[0]?.firstname }} {{ selectedConversation.participants?.[0]?.lastname }}</p>
         <i class="icon clickable fa fa-ellipsis-h right" aria-hidden="true"></i>
       </div>
-
       <div class="messages-chat">
-        <div class="message" *ngFor="let message of messageList">
-          <div class="photo" [style.background-image]="'url(' + message.sender.photoUrl + ')'"></div>
-          <div class="message-content">
-            <p class="sender-name">{{ message.sender.firstname }}</p>
-            <p class="message-text">{{ message.content }}</p>
+        <div class="message" *ngFor="let message of selectedConversation.messages">
+          <div class="photo" style="background-image: url(https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);">
+            <div class="online"></div>
+          </div>
+          <p class="text" *ngIf="message.sender?.ID != userId"> {{ message.content }} </p>
+        </div>
+        <div class="message text-only"  *ngFor="let message1 of replyMessages">
+          <div class="response" *ngIf="userId">
+            <p class="text btn-primary"> {{message1}}</p>
           </div>
         </div>
       </div>
-
-      <div class="input-bar">
-        <input type="text" placeholder="Type a message..." formControlName="replymessage">
-        <button class="send-button" (click)="sendMessage()">Send</button>
+      <div class="footer-chat">
+        <i class="icon fa fa-smile-o clickable" style="font-size:25pt;" aria-hidden="true"></i>
+        <input type="text" class="write-message" placeholder="Type your message here" [(ngModel)]="replyMessage">
+        <button class="icon send fa fa-paper-plane-o clickable btn-primary" aria-hidden="true" (click)="sendMessage()"></button>
       </div>
-    </section>
-  </div>
-</div>
+

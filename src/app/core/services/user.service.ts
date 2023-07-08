@@ -40,4 +40,11 @@ export class UserService {
     if (userId) return true;
     return false;
   }
+
+  getUserById(userId: number): Observable<UserEntity> {
+    return this.http.get<UserEntity>(`${this.apiUrl}/${userId}`);
+  }
+  getUsersByName(searchQuery: string): Observable<UserEntity[]> {
+    return this.http.get<UserEntity[]>(`${this.apiUrl}/user/${searchQuery}`);
+  }
 }

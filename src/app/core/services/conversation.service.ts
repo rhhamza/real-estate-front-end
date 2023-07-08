@@ -42,7 +42,7 @@ export class ConversationService {
     return this.http.get<Conversation>(`${this.baseUrl}/${firstName}/${lastName}`);
   }
 
-  getConversationByUserFirstNameOrLastName(name: string): Observable<Conversation> {
+  getConversationByUserFirstNameOrLastName(firstname: string, lastname: string): Observable<Conversation> {
     return this.http.get<Conversation>(`${this.baseUrl}/search?name=${name}`);
   }
 

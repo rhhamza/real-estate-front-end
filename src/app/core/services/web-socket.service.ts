@@ -10,7 +10,19 @@ export class WebSocketService {
   private messageSubject$: Subject<any> = new Subject<any>();
 
   constructor() {
-    this.socket$ = webSocket<any>({ url: 'ws://localhost:8089/Realstate/myhandler' });
+    this.socket$ = webSocket({
+      url: 'ws://localhost:8089/Realstate/myhandler',
+      deserializer: (msg) => {
+        try {
+          // Attempt to parse the received message as JSON
+          return JSON.parse(msg.data);
+        } catch (error) {
+          // Handle parsing error and return the original message
+          console.error('Error parsing WebSocket message:', error);
+          return msg.data;
+        }
+      }
+    });
 
     this.socket$.subscribe(
       (message) => {

@@ -1,11 +1,16 @@
+import { Conversation } from './../core/models/conversation.model';
+import { UserService } from 'src/app/core/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Conversation } from '../core/models/conversation.model';
 import { Message } from '../core/models/message.model';
 import { ConversationService } from '../core/services/conversation.service';
-import { UserService } from '../core/services/user.service';
 import { WebSocketService } from '../core/services/web-socket.service';
+import { UserEntity } from '../core/models/user-entity.model';
+import { MessageService } from '../core/services/message.service';
+import { getLocaleDateFormat } from '@angular/common';
+import { DatePipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-chat',
@@ -13,24 +18,26 @@ import { WebSocketService } from '../core/services/web-socket.service';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
-
   chatForm: FormGroup;
-  chatObj?: Conversation ;
-  messageObj?: Message ;
-  messageList: any = [];
-  chatList: any = [];
-  replymessage: string = '';
-  chatData: any;
-  chatId: any;
-  firstname?: string;
-  lastname?: string;
-  loggedInUser?: string | null;
+  chatList: Conversation[] = [];
+  chatData: Conversation | null = null;
+  messageList: Message[] = [];
+  replyMessage: string = '';
+  loggedInUser: string | null = null;
+  userId: number | null = null;
+  selectedConversation: Conversation | null = null;
+  replyMessageStatus = false;
+  replyMessages: string[] = [];
+  searchQuery?: string;
+  searchResults?: UserEntity[];
 
   constructor(
     private chatService: ConversationService,
     private router: Router,
+    private messageService: MessageService,
+    private websocketService: WebSocketService,
     private userService: UserService,
-    private websocketService: WebSocketService
+    private datePipe: DatePipe
   ) {
     this.chatForm = new FormGroup({
       replymessage: new FormControl()
@@ -38,15 +45,52 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loggedInUser = sessionStorage.getItem('username');
+    this.loggedInUser = localStorage.getItem('username');
+    this.userId = parseInt(localStorage.getItem('userId') || '0');
     this.loadChatList();
     this.initializeWebSocket();
+    console.log(this.userId)
+    
+  }
+
+  fetchConversations() {
+    // Use your conversation service to fetch all conversations
+    this.chatService.getConversationsByUser(this.userId!).subscribe(
+      (conversations: any[]) => {
+        this.chatList = conversations;
+      },
+      (error) => {
+        console.error('Error fetching conversations:', error);
+      }
+    );
+  }
+
+
+
+  fetchMessagesById(conversationId: number) {
+    // Use your conversation service to fetch messages by conversation ID
+    this.messageService.getMessagesByConversation(conversationId).subscribe(
+      (messages: any[]) => {
+        this.selectedConversation!.messages = messages;
+  
+        console.log('userId:', this.userId);
+        console.log('sender IDs:');
+        messages.forEach((message) => {
+          console.log(message.sender?.ID);
+        });
+  
+        const filteredMessages = messages.filter((message) => message.sender?.ID === this.userId);
+        console.log(filteredMessages, "current messages");
+      },
+      (error) => {
+        console.error('Error fetching messages:', error);
+      }
+    );
   }
 
   loadChatList() {
-    this.chatService.getConversationByUserFirstNameOrLastName(this.loggedInUser!).subscribe(data => {
-      this.chatData = data;
-      this.chatList = this.chatData;
+    this.chatService.getConversationsByUser(this.userId!).subscribe(data => {
+      this.chatList = data;
     });
   }
 
@@ -54,7 +98,7 @@ export class ChatComponent implements OnInit {
     this.websocketService.connect();
 
     this.websocketService.receiveMessage().subscribe((message) => {
-      if (this.chatId && message.chatId === this.chatId) {
+      if (this.chatData && message.conversation?.id === this.chatData.id) {
         this.messageList.push(message);
       }
     });
@@ -63,24 +107,57 @@ export class ChatComponent implements OnInit {
   loadChatByEmail(userEmail: string) {
     this.chatService.getConversationByParticipantName(this.loggedInUser!, userEmail).subscribe(data => {
       this.chatData = data;
-      this.chatId = this.chatData[0].chatId;
-      sessionStorage.setItem('chatId', this.chatId);
+      this.messageList = this.chatData?.messages || [];
 
-      this.chatService.getConversationById(this.chatId).subscribe(data => {
-        this.chatData = data;
-        this.messageList = this.chatData.messageList;
-        this.firstname = this.chatData.firstname;
-      });
     });
   }
 
-  sendMessage() {
-    this.messageObj!.content = this.chatForm.value.replymessage;
-    this.messageObj!.sender!.email! = this.loggedInUser!;
-    this.messageObj!.conversation!.id = this.chatId;
-    this.websocketService.sendMessage(this.messageObj);
-    this.chatForm.reset();
+  getUserById(id : number) {
+
   }
+
+  sendMessage() {
+    if (this.selectedConversation) {
+      const currentDate = new Date();
+      const formattedDate = this.datePipe.transform(currentDate, 'yyyy-MM-dd HH:mm:ss');
+      const message: Message = {
+        content: this.replyMessage,
+        sender: undefined, // Initialize sender as undefined
+        conversation: { id: this.selectedConversation.id },
+        timestamp: new Date(formattedDate!)
+      };
+  
+      this.userService.getUserById(this.userId!).subscribe(
+        (user: UserEntity) => {
+          // Assign the retrieved user as the sender
+          message.sender = user;
+  
+          // Send message through WebSocket
+          this.messageService.sendMessageThroughWebSocket(message);
+          this.replyMessages.push(this.replyMessage)
+  
+          // Insert the message into the database using HTTP POST
+          this.messageService.sendMessage(message).subscribe(
+            (response) => {
+              // Reset the chat form and clear the reply message
+              this.chatForm.reset();
+              this.replyMessage = '';
+            },
+            (error) => {
+              // Handle any errors that occur during sending the message or inserting it into the database
+              console.error('Error sending or inserting message:', error);
+            }
+          );
+        },
+        (error) => {
+          console.error('Error retrieving user:', error);
+        }
+      );
+    } else {
+      console.log('No conversation selected');
+    }
+  }
+  
 
   routeX() {
     sessionStorage.clear();
@@ -91,27 +168,78 @@ export class ChatComponent implements OnInit {
     this.router.navigateByUrl('');
   }
 
-  goToChat(username: string) {
-    this.chatService.getConversationByParticipantName(username, this.loggedInUser!).subscribe(
-      (data) => {
-        this.chatId = data.id;
-        sessionStorage.setItem('chatId', this.chatId);
-      },
-      (error) => {
-        if (error.status == 404) {
-          this.messageObj!.sender!.email! = this.loggedInUser!;
-          this.chatObj!.participants![0].firstname! = this.loggedInUser!;
-          this.chatObj!.participants![0].lastname! = username;
-          this.chatService.createConversation(this.chatObj!).subscribe(
-            (data) => {
-              this.chatData = data;
-              this.chatId = this.chatData.chatId;
-              sessionStorage.setItem('chatId', this.chatData.chatId);
-            });
-        } else {
-          // Handle error
+  goToChat(id: number | undefined) {
+    if (id !== undefined) {
+      this.chatService.getConversationById(id).subscribe(
+        (data) => {
+          this.chatData = data;
+          this.messageList = this.chatData?.messages!;
+          console.log(data)
+        },
+        (error) => {
+          if (error.status === 404) {
+            const newConversation: Conversation = {
+              /*participants: [
+                { firstname: this.loggedInUser!, lastname: this.lastName! }
+              ]*/
+            };
+            this.chatService.createConversation(newConversation).subscribe(
+              (data) => {
+                this.chatData = data;
+                this.messageList = this.chatData?.messages!;
+              }
+            );
+          } else {
+            // Handle other errors here
+          }
         }
+      );
+    } else {
+      // Handle the case where id is undefined
+    }
+  }
+  selectConversation(conversation: Conversation) {
+    this.selectedConversation = conversation;
+    this.fetchMessagesById(conversation?.id!);
+    
+  }
+
+  searchUsers() {
+    if (this.searchQuery) {
+      this.userService.getUsersByName(this.searchQuery)
+        .subscribe((users: UserEntity[]) => {
+          this.searchResults = users;
+        });
+    }
+  }
+
+  createConversation(user: UserEntity) {
+    const conversation: Conversation = {
+      participants: [user],
+      messages: []
+    };
+
+    this.chatService.createConversation(conversation)
+      .subscribe((createdConversation: Conversation) => {
+        // Handle successful conversation creation
+        console.log('Conversation created:', createdConversation);
       });
   }
 
+  // getCurrentMessages(){
+  //   this.messageService.getAllmessags().subscribe(
+  //     (messages: Message[]) => {
+  //       console.log(messages);
+  //       const iduser = localStorage.getItem('userId');
+  //       const filteredMessages = messages.filter((message) => message.sender?.ID === this.userId );
+  //       console.log(filteredMessages);
+  //       // Use the filteredMessages as needed
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching messages:', error);
+  //     }
+  //   );
+
+  // }
+  
 }
