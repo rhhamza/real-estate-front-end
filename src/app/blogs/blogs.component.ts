@@ -119,24 +119,31 @@ export class BlogsComponent implements OnInit {
   }
 
   updatePublication() {
-    const publication = {
-      title: this.publicationForm.value.title,
-      content: this.publicationForm.value.content,
-    };
-
-    this.publicationService
-      .updatePublication(this.data.id, publication)
-      .subscribe(
-        () => {
-          this.notifier.notify("success", "Blog Suuccessfully updated");
-          this.publicationForm.reset();
-          this.fetchPublications();
-          this.modalService.dismissAll();
-        },
-        (error) => {
-          console.error("Error updating publication:", error);
+    let userId = localStorage.getItem('userId');
+    if (userId) {
+      let publication = {
+        title: this.publicationForm.value.title,
+        content: this.publicationForm.value.content,
+        user :{
+          id: userId
         }
-      );
+      };
+  
+      this.publicationService
+        .updatePublication(this.data.id, publication)
+        .subscribe(
+          () => {
+            this.notifier.notify("success", "Blog Suuccessfully updated");
+            this.publicationForm.reset();
+            this.fetchPublications();
+            this.modalService.dismissAll();
+          },
+          (error) => {
+            console.error("Error updating publication:", error);
+          }
+        );
+    }
+   
   }
 
   data: any;
