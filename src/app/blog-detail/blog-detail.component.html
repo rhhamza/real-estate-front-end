@@ -6,10 +6,11 @@
           <h2>{{ publication.title }}</h2>
           <ul class="list-unstyled mt-4">
             <li class="list-inline-item h6 user text-muted me-2">
-              <i class="mdi mdi-account"></i> Wael Keefi
+              <!-- <i class="mdi mdi-account"></i> {{ data.user }} -->
             </li>
             <li class="list-inline-item h6 date text-muted">
-              <i class="mdi mdi-calendar-check"></i> {{ publication.createdAt | date: 'medium'}}
+              <i class="mdi mdi-calendar-check"></i>
+              {{ publication.createdAt | date : "medium" }}
             </li>
           </ul>
           <div class="page-next">
@@ -80,8 +81,18 @@
                     class="text-muted like"
                     (click)="react('Heart', publication.id)"
                   >
-                    <i class="uil uil-heart me-1"></i>{{ heartCount }}
+                    <i class="uil uil-heart me-1"></i>
                   </a>
+                  <a
+                    style="
+                      text-decoration: none;
+                      color: #8492a6;
+                      cursor: pointer;
+                    "
+                    (click)="openModal(modalBasicContent, 'Heart')"
+                  >
+                    {{ heartCount }}</a
+                  >
                 </li>
                 <li class="list-inline-item me-2 mb-0">
                   <a
@@ -89,7 +100,17 @@
                     class="text-muted like"
                     (click)="react('Like', publication.id)"
                   >
-                    <i class="uil uil-thumbs-up me-1"></i>{{ likeCount }}
+                    <i class="uil uil-thumbs-up me-1"></i>
+                  </a>
+                  <a
+                    style="
+                      text-decoration: none;
+                      color: #8492a6;
+                      cursor: pointer;
+                    "
+                    (click)="openModal(modalBasicContent, 'Like')"
+                  >
+                    {{ likeCount }}
                   </a>
                 </li>
                 <li class="list-inline-item me-2 mb-0">
@@ -98,7 +119,17 @@
                     class="text-muted dislike"
                     (click)="react('Dislike', publication.id)"
                   >
-                    <i class="uil uil-thumbs-down me-1"></i>{{ dislikeCount }}
+                    <i class="uil uil-thumbs-down me-1"></i>
+                  </a>
+                  <a
+                    style="
+                      text-decoration: none;
+                      color: #8492a6;
+                      cursor: pointer;
+                    "
+                    (click)="openModal(modalBasicContent, 'Dislike')"
+                  >
+                    {{ dislikeCount }}
                   </a>
                 </li>
                 <!-- <li class="list-inline-item">
@@ -306,123 +337,6 @@
             <!--end form-->
           </div>
         </div>
-
-        <div class="card shadow rounded border-0 mt-4">
-          <div class="card-body">
-            <h5 class="card-title mb-0">Related Posts :</h5>
-
-            <div class="row">
-              <div class="col-lg-6 mt-4 pt-2">
-                <div class="card blog rounded border-0 shadow">
-                  <div class="position-relative">
-                    <img
-                      src="assets/images/blog/01.jpg"
-                      class="card-img-top rounded-top"
-                      alt="..."
-                    />
-                    <div class="overlay rounded-top bg-dark"></div>
-                  </div>
-                  <div class="card-body content">
-                    <h5>
-                      <a
-                        href="javascript:void(0)"
-                        class="card-title title text-dark"
-                        >Design your apps in your own way</a
-                      >
-                    </h5>
-                    <div class="post-meta d-flex justify-content-between mt-3">
-                      <ul class="list-unstyled mb-0">
-                        <li class="list-inline-item me-2 mb-0">
-                          <a href="javascript:void(0)" class="text-muted like"
-                            ><i class="uil uil-heart me-1"></i>33</a
-                          >
-                        </li>
-                        <li class="list-inline-item">
-                          <a
-                            href="javascript:void(0)"
-                            class="text-muted comments"
-                            ><i class="uil uil-comment me-1"></i>08</a
-                          >
-                        </li>
-                      </ul>
-                      <a
-                        routerLink="/page-blog-detail"
-                        class="text-muted readmore"
-                        >Read More
-                        <i class="uil uil-angle-right-b align-middle"></i
-                      ></a>
-                    </div>
-                  </div>
-                  <div class="author">
-                    <small class="text-light user d-block"
-                      ><i class="uil uil-user"></i> Calvin Carlo</small
-                    >
-                    <small class="text-light date"
-                      ><i class="uil uil-calendar-alt"></i> 13th August,
-                      2019</small
-                    >
-                  </div>
-                </div>
-              </div>
-              <!--end col-->
-
-              <div class="col-lg-6 mt-4 pt-2">
-                <div class="card blog rounded border-0 shadow">
-                  <div class="position-relative">
-                    <img
-                      src="assets/images/blog/02.jpg"
-                      class="card-img-top rounded-top"
-                      alt="..."
-                    />
-                    <div class="overlay rounded-top bg-dark"></div>
-                  </div>
-                  <div class="card-body content">
-                    <h5>
-                      <a
-                        href="javascript:void(0)"
-                        class="card-title title text-dark"
-                        >How apps is changing the IT world</a
-                      >
-                    </h5>
-                    <div class="post-meta d-flex justify-content-between mt-3">
-                      <ul class="list-unstyled mb-0">
-                        <li class="list-inline-item me-2 mb-0">
-                          <a href="javascript:void(0)" class="text-muted like"
-                            ><i class="uil uil-heart me-1"></i>33</a
-                          >
-                        </li>
-                        <li class="list-inline-item">
-                          <a
-                            href="javascript:void(0)"
-                            class="text-muted comments"
-                            ><i class="uil uil-comment me-1"></i>08</a
-                          >
-                        </li>
-                      </ul>
-                      <a
-                        routerLink="/page-blog-detail"
-                        class="text-muted readmore"
-                        >Read More
-                        <i class="uil uil-angle-right-b align-middle"></i
-                      ></a>
-                    </div>
-                  </div>
-                  <div class="author">
-                    <small class="text-light user d-block"
-                      ><i class="uil uil-user"></i> Calvin Carlo</small
-                    >
-                    <small class="text-light date"
-                      ><i class="uil uil-calendar-alt"></i> 13th August,
-                      2019</small
-                    >
-                  </div>
-                </div>
-              </div>
-              <!--end col-->
-            </div>
-            <!--end row-->
-          </div>
-        </div>
       </div>
       <!-- BLog End -->
 
@@ -434,3 +348,28 @@
 </section>
 <!--end section-->
 <!-- Blog End -->
+<ng-template #modalBasicContent let-modal="">
+  <div class="modal-header">
+    <h4 class="modal-title text-secondary" id="modal-basic-title">
+      Reactions Users List
+    </h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <h5 class="text-primary">Selected Reaction : {{ selectedReactionType }}</h5>
+    <ul
+      *ngIf="selectedReactionType"
+      style="list-style: none; font-size: 1.2rem"
+    >
+      <li *ngFor="let user of getReactionUsers(selectedReactionType)">
+        <i class="mdi mdi-account text-primary"></i> {{ user.firstname }}
+        {{ user.lastname }}
+      </li>
+    </ul>
+  </div>
+</ng-template>

@@ -81,9 +81,10 @@
               />
               <div class="overlay bg-dark"></div>
               <div class="author">
-                <small class="text-light user d-block"
-                  ><i class="uil uil-user"></i> {{ data.title }}</small
-                >
+                <!-- <small class="text-light user d-block"
+                  ><i class="uil uil-user"></i> {{ data.user.firstname }}
+                  {{ data.user.lastName }}</small
+                > -->
                 <small class="text-light date"
                   ><i class="uil uil-calendar-alt"></i>
                   {{ data.createdAt }}</small
@@ -105,13 +106,14 @@
                   <ul class="list-unstyled mb-0">
                     <li class="list-inline-item me-2 mb-0">
                       <a href="javascript:void(0)" class="text-muted like"
-                        ><i class="uil uil-heart me-1"></i>{{ data.like }}</a
+                        ><i class="uil uil-heart me-1"></i
+                        >{{ data.reactions.length }}</a
                       >
                     </li>
                     <li class="list-inline-item">
                       <a href="javascript:void(0)" class="text-muted comments"
                         ><i class="uil uil-comment me-1"></i
-                        >{{ data.message }}</a
+                        >{{ data.comments.length }}</a
                       >
                     </li>
                   </ul>
@@ -123,7 +125,13 @@
                 </div>
 
                 <div class="mt-3 d-flex justify-content-between">
-                  <button class="btn btn-primary btn-card-blog">
+                  <button
+                    class="btn btn-primary btn-card-blog"
+                    *ngIf="
+                      userService.isAuthenticated() && userId == data?.user?.id
+                    "
+                    (click)="openUpdateModal(data, updatdeModal)"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="15"
@@ -145,7 +153,13 @@
                       </g>
                     </svg>
                   </button>
-                  <button class="btn btn-danger btn-card-blog">
+                  <button
+                    class="btn btn-danger btn-card-blog"
+                    *ngIf="
+                      userService.isAuthenticated() && userId == data?.user?.id
+                    "
+                    (click)="deletePublication(data.id)"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="18"
@@ -236,6 +250,51 @@
     </button>
     <button type="submit" class="btn btn-primary" (click)="createPublication()">
       Create
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #updatdeModal let-modal="">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Modifier un Blog</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="publicationForm" (submit)="updatePublication()">
+      <!-- Form fields for title and content -->
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          formControlName="title"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="content">Content</label>
+        <textarea
+          class="form-control"
+          id="content"
+          formControlName="content"
+          required
+        ></textarea>
+      </div>
+      <!-- Add more fields if needed -->
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+      Cancel
+    </button>
+    <button type="submit" class="btn btn-primary" (click)="updatePublication()">
+      update
     </button>
   </div>
 </ng-template>

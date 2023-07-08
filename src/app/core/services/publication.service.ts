@@ -21,6 +21,9 @@ export class PublicationService {
     return this.http.get<Publication[]>(`${this.baseUrl}`);
   }
 
+  getAllFullPublications(): Observable<Publication[]> {
+    return this.http.get<Publication[]>(`${this.baseUrl}/fullpublications`);
+  }
   createPublication(
     publication: Publication,
     userId: string

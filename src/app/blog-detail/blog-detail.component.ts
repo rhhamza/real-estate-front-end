@@ -7,6 +7,7 @@ import { PublicationReaction } from "../core/models/publication-reaction.model";
 import { DatePipe } from "@angular/common";
 import { PublicationComment } from "../core/models/publication-comment.model";
 import { PublicationCommentService } from "../core/services/publication-comment.service";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: "app-blog-detail",
@@ -25,12 +26,15 @@ export class BlogDetailComponent implements OnInit {
   commentCount?: number;
   userReaction: PublicationReaction | undefined | [];
   commentContent?: any;
+  selectedReactionType?: string;
+  userId = Number(localStorage.getItem("userId"));
   constructor(
     private route: ActivatedRoute,
     private publicationService: PublicationService,
     private reactionService: PublicationReactionService,
     private datePipe: DatePipe,
-    private commentService: PublicationCommentService
+    private commentService: PublicationCommentService,
+    public modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -47,7 +51,27 @@ export class BlogDetailComponent implements OnInit {
       this.checkUserReaction(publicationId!);
     });
   }
-
+  openModal(content: any, reactionType: string) {
+    this.selectedReactionType = reactionType;
+    this.modalService.open(content, {
+      ariaLabelledBy: "modal-basic-title",
+      size: "lg",
+    });
+  }
+  closeModal(): void {
+    this.modalService.dismissAll();
+  }
+  getReactionUsers(reactionType: string): UserEntity[] {
+    if (reactionType === "Like") {
+      return this.likeUsers;
+    } else if (reactionType === "Dislike") {
+      return this.dislikeUsers;
+    } else if (reactionType === "Heart") {
+      return this.heartUsers;
+    } else {
+      return [];
+    }
+  }
   getPublication(publicationId: number): void {
     this.publicationService.getPublicationById(publicationId).subscribe(
       (publication) => {
@@ -90,6 +114,7 @@ export class BlogDetailComponent implements OnInit {
             this.heartUsers = users;
             break;
         }
+        console.log("user", users);
       });
   }
 
@@ -112,33 +137,32 @@ export class BlogDetailComponent implements OnInit {
   }
 
   checkUserReaction(publicationId: number): void {
-    const userId = 1;
-    this.reactionService
-      .getReactionByUserAndPublication(userId, publicationId)
-      .subscribe(
-        (reaction: PublicationReaction) => {
-          this.userReaction = reaction;
-          console.log("jj", reaction);
-        },
-        (error: any) => {
-          if (error.status === 404) {
-            this.userReaction = [];
-          } else {
-            // Handle other errors if needed
+    if (this.userId) {
+      this.reactionService
+        .getReactionByUserAndPublication(this.userId, publicationId)
+        .subscribe(
+          (reaction: PublicationReaction) => {
+            this.userReaction = reaction;
+          },
+          (error: any) => {
+            if (error.status === 404) {
+              this.userReaction = [];
+            } else {
+              // Handle other errors if needed
+            }
           }
-        }
-      );
+        );
+    }
   }
 
   react(reactionType: any, publicationId: number): void {
-    const userId = 1;
+    const userId = this.userId;
     const reaction = {
       id: 0,
       reaction: reactionType,
       idUser: userId,
       idPublication: publicationId,
     };
-    console.log("hhh", this.userReaction);
     if (Array.isArray(this.userReaction)) {
       this.reactionService
         .createReaction(
@@ -149,6 +173,7 @@ export class BlogDetailComponent implements OnInit {
         .subscribe((newReaction: any) => {
           this.userReaction = newReaction;
           this.updateReactionCounts(reactionType, 1);
+          this.fetchUsersByReactionType(reactionType, publicationId);
         });
     } else {
       if (this.userReaction && this.userReaction.reaction === reactionType) {
@@ -157,6 +182,7 @@ export class BlogDetailComponent implements OnInit {
           .subscribe(() => {
             this.userReaction = [];
             this.updateReactionCounts(reactionType, -1);
+            this.fetchUsersByReactionType(reactionType, publicationId);
           });
       } else {
         // this.reactionService
@@ -176,6 +202,7 @@ export class BlogDetailComponent implements OnInit {
             .subscribe((newReaction: any) => {
               this.userReaction = newReaction;
               this.updateReactionCounts(reactionType, 1);
+              this.fetchUsersByReactionType(reactionType, publicationId);
             });
         } else {
           if (
@@ -187,6 +214,7 @@ export class BlogDetailComponent implements OnInit {
               .subscribe(() => {
                 this.userReaction = [];
                 this.updateReactionCounts(reactionType, -1);
+                this.fetchUsersByReactionType(reactionType, publicationId);
               });
           }
         }
@@ -232,20 +260,20 @@ export class BlogDetailComponent implements OnInit {
       content: commentContent,
     };
 
-    const userId = 1;
+    this.commentService
+      .createComment(comment, this.userId, publicationId)
+      .subscribe(
+        (newComment: PublicationComment) => {
+          console.log("New comment:", newComment);
 
-    this.commentService.createComment(comment, userId, publicationId).subscribe(
-      (newComment: PublicationComment) => {
-        console.log("New comment:", newComment);
-
-        this.getCommentList(publicationId);
-        // Reset the commentContent after submitting the comment
-        this.resetCommentContent();
-      },
-      (error) => {
-        console.error("Error creating comment:", error);
-      }
-    );
+          this.getCommentList(publicationId);
+          // Reset the commentContent after submitting the comment
+          this.resetCommentContent();
+        },
+        (error) => {
+          console.error("Error creating comment:", error);
+        }
+      );
   }
 
   resetCommentContent(): void {
