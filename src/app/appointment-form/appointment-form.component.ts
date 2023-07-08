@@ -81,7 +81,7 @@ export class AppointmentFormComponent implements OnInit {
         console.log(this.AppoitmentForm.value);
         this.notifier.notify(
           'success',
-          'Offer succesfully Added'
+          'Appointment succesfully Added'
         );
       }, err => {
         this.notifier.notify(
